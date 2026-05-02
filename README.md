@@ -319,7 +319,7 @@ NEXT_PUBLIC_COZE_PUBLIC_TOKEN=
 - `public/llms.txt`：提供 AI 友好的站点说明、关键页面链接、可引用摘要和更新时间。
 - 首页“可引用摘要”模块：补充 5 个具体数字、3 个权威引用入口和更适合 AI 摘录的首段说明。
 - 首页“可信度说明”模块：补充交付边界、维护方式、小白友好流程、更新时间等 E-E-A-T 信号。
-- 结构化数据：从单一 `Person` 扩展为 `Person`、`WebSite`、`ProfessionalService`、`FAQPage`。
+- 结构化数据：保留 `WebSite`、`ProfessionalService`、`FAQPage`，避免把首页做成简历式个人页。
 - 信任页面：新增 `/about`、`/contact`、`/privacy`、`/terms`，并从首页 footer 直接可达。
 - 元数据修复：canonical、robots、sitemap 改为优先读取 `NEXT_PUBLIC_SITE_URL`，其次读取 Vercel 自动提供的 `VERCEL_URL`，避免线上指向 `localhost`。
 - sitemap 扩展：加入首页、英文预留页、关于、联系、隐私、条款和 `llms.txt`。

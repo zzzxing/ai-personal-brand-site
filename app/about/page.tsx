@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 import { getAbsoluteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = {
-  title: "关于｜Zing AI Lab",
-  description: "了解 Zing AI Lab 的定位、能力依据、AI 应用落地样板间结构和适合合作的场景。",
+  title: "关于｜智页 AI Lab",
+  description: "了解智页 AI Lab 的服务定位、AI 应用样板间结构、适合场景和轻量项目交付方式。",
   alternates: {
     canonical: getAbsoluteUrl("/about")
   }
@@ -12,24 +12,24 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <TrustPageShell title="关于 Zing AI Lab" eyebrow="About" updatedAt="2026-05-02">
+    <TrustPageShell title="关于智页 AI Lab" eyebrow="About" updatedAt="2026-05-02">
       <p>
-        Zing AI Lab 是面向个人、小企业、教育项目和早期团队的 AI 应用落地样板间，展示如何把 AI 客服、
-        知识库问答、品牌官网、后台管理、云数据库和 Vercel 部署组合成可访问、可演示、可迭代的在线应用。
+        智页 AI Lab 是面向个人、小企业、教育项目和早期团队的 AI 应用落地样板间。它不是一页普通介绍，而是展示如何把
+        AI 客服、FAQ 问答、项目展示页、后台内容管理、云数据库和 Vercel 部署组合成一个能访问、能演示、能继续改的网页应用。
       </p>
       <h2>服务定位</h2>
       <p>
-        本站公开品牌统一使用 Zing AI Lab，公开身份统一使用 Zing。它不是普通简历页，而是用于说明个人开发者
-        如何将 DeepSeek、Dify、Coze、NLP 分析与 Web 开发结合起来的 AI 应用样板。
+        智页更适合从小而完整的版本开始：先做一个能打开的网址，讲清楚服务、项目、资料和联系入口，再根据真实访问和提问继续优化。
+        对于小企业、个人品牌、课程项目或早期 AI 想法，这比一开始规划复杂系统更容易落地。
       </p>
       <h2>技术与交付原则</h2>
       <p>
-        项目采用 Next.js、Tailwind CSS、Vercel、Neon Postgres、DeepSeek API、Dify/Coze 扩展思路和后台内容管理。
-        这些选择的共同目标是降低首版上线风险，让小项目先变成可访问、可反馈的版本。
+        智页优先使用 Next.js、Tailwind CSS、Vercel、Neon Postgres、DeepSeek API，以及 Dify/Coze 的智能体扩展思路。
+        这些选择的共同目标是降低首版上线风险，让项目先变成可访问、可反馈、可维护的版本。
       </p>
-      <h2>适合合作的场景</h2>
+      <h2>适合沟通的场景</h2>
       <p>
-        适合需要 AI 客服演示站、个人品牌官网、小企业落地页、课程/研学项目原型、NLP 文本分析工具和资料整理自动化的场景。
+        适合需要 AI 客服演示站、个人品牌官网、小企业落地页、课程或研学项目原型、FAQ 问答页、文本资料整理工具和轻量自动化流程的场景。
       </p>
     </TrustPageShell>
   );

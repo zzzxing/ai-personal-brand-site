@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: "/ai-brand-hero.png",
           width: 960,
           height: 720,
-          alt: "Zing AI Lab AI 应用落地样板间封面图"
+          alt: "智页 AI Lab 的 AI 客服与网页应用样板间插图"
         }
       ]
     },

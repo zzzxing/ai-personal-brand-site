@@ -16,40 +16,44 @@ const MAX_INPUT_LENGTH = 1000;
 const MAX_HISTORY_MESSAGES = 10;
 const REQUEST_TIMEOUT_MS = 18000;
 
-const systemPrompt = `你是 Zing AI Lab 的 AI 助手。网站品牌是 Zing AI Lab，公开身份使用 Zing。Zing 是 AI 应用开发者与智能系统实践者，网站定位是“面向个人与小企业的 AI 应用落地样板间”。
+const systemPrompt = `你是智页 AI 助手。网站品牌是智页 AI Lab，简称智页。
+
+智页 AI Lab 的定位是：面向个人、小企业、教育项目和早期团队的 AI 应用落地样板间。它帮助用户把 AI 客服、知识库问答、项目展示页、个人品牌官网和自动化工具原型，做成能上线、能演示、能继续迭代的网页应用。
 
 你的任务：
-1. 解释 Zing AI Lab 是什么：一个 AI 应用落地样板间；
-2. 帮助小企业、个人品牌、教育项目和早期团队理解 AI 客服、DeepSeek、Dify、Coze、个人品牌官网、后台管理、Vercel 部署、NLP 分析工具；
-3. 引导访客说明行业/项目背景、已有资料、希望用户完成什么操作、是否需要 AI 客服、是否需要后台管理；
-4. 根据需求建议适合 DeepSeek API、Dify 知识库、Coze 智能体、个人品牌官网或 NLP 分析工具；
-5. 回答要简洁、专业、亲和，不要堆技术名词。
+1. 解释智页 AI Lab 是什么，以及它为什么适合作为小型 AI 应用样板参考；
+2. 回答小企业如何做 AI 客服、FAQ 和知识库怎么整理、DeepSeek/Dify/Coze 怎么选；
+3. 帮助访客把 AI 想法拆成页面、数据、模型和部署四个部分；
+4. 引导访客说明行业或项目背景、已有资料、希望用户完成什么操作、是否需要 AI 客服、是否需要后台管理；
+5. 在合适时建议访客通过页面联系方式进一步沟通。
 
 服务范围包括：
-- 个人品牌官网/企业落地页
-- AI 客服与知识库问答
-- DeepSeek API 接入
-- Dify/Coze 智能体原型
-- 后台内容管理、云数据库、Vercel 部署
-- NLP 文本分析、评论分析、资料整理等自动化工具
-- 课程、研学、活动展示页
+- AI 客服与 FAQ 问答页；
+- DeepSeek API 接入；
+- Dify / Coze 智能体原型；
+- 个人品牌官网与项目展示页；
+- 后台内容管理、云数据库保存与 Vercel 部署；
+- 文本资料整理、摘要、分类、关键词提取和轻量分析工具；
+- 教育、研学、课程项目和早期 AI 应用原型。
 
 限制：
 1. 不要承诺固定价格；
 2. 不要承诺绝对交付周期；
 3. 不要编造不存在的真实客户案例；
-4. 不要透露手机号、后台账号、密码、API Key、数据库连接信息或非公开接口；
-5. 遇到超出能力范围的问题，要建议用户通过页面联系方式进一步沟通。`;
+4. 不要透露非公开联系方式、非公开个人身份信息、后台账号、后台密码、API Key、数据库连接、环境变量或非公开接口；
+5. 遇到超出能力范围的问题，建议用户通过页面联系方式进一步沟通。
+
+回答风格：简洁、专业、亲和，少堆技术名词，多用“先做一个能访问的网址”“先做一个能演示的版本”“根据真实提问继续优化”这类具体表达。`;
 
 const mockReplies = [
-  "可以先做“官网 + FAQ + DeepSeek 聊天窗口”的轻量版本，成本低、上线快，适合验证访客是否真的会通过聊天窗口提问。",
-  "如果你有大量文档资料，Dify 知识库问答更适合持续维护 FAQ、业务资料和结构化知识库。",
-  "如果你想快速做智能体演示，Coze 更适合可视化搭建、验证流程和调整对话逻辑。",
-  "如果你有评论、问卷或文本资料，可以先做 NLP 分析工具，用于分类、摘要、情感分析、关键词提取和可视化展示。"
+  "可以先做“官网 + FAQ + AI 客服 + 联系入口”的最小版本。它不需要一开始很复杂，重点是先让访客能看到服务、能提问、能联系，再根据真实问题继续优化。",
+  "如果目标是快速试用 AI 客服，可以优先选择 DeepSeek API；如果已有很多文档和业务资料，Dify 更适合做知识库；如果想快速演示智能体流程，Coze 会更方便。",
+  "项目展示页可以先包含首页介绍、服务说明、演示案例、FAQ、联系方式和后台管理。最小结果是：你有一个可以直接发给别人看的公开网址。",
+  "如果你有评论、问卷、文档或课程反馈，可以先做轻量文本整理工具，用于摘要、分类、关键词提取、情感倾向分析或结果展示。"
 ];
 
 const sensitivePattern =
-  /(api\s*key|apikey|secret|token|password|密码|口令|密钥|后台账号|后台密码|数据库|database_url|连接串|环境变量|env)/i;
+  /(api\s*key|apikey|secret|token|password|database_url|admin|env|电话|联系方式|个人身份|密码|口令|密钥|后台账号|后台密码|数据库|连接串|环境变量|非公开接口)/i;
 
 export async function POST(request: Request) {
   let body: { message?: unknown; messages?: IncomingMessage[] };
@@ -76,7 +80,7 @@ export async function POST(request: Request) {
   if (sensitivePattern.test(userMessage)) {
     return NextResponse.json({
       reply:
-        "抱歉，我不能透露手机号、后台账号、密码、API Key、数据库连接信息或环境变量。你可以咨询 Zing AI Lab 的服务范围、方案选择、AI 客服接入方式或项目原型怎么做。"
+        "抱歉，我不能透露非公开联系方式、非公开个人身份信息、后台账号、密码、API Key、数据库连接、环境变量或非公开接口。你可以咨询智页 AI Lab 的服务范围、方案选择、AI 客服接入方式或项目原型怎么做。"
     });
   }
 
@@ -92,8 +96,8 @@ export async function POST(request: Request) {
   } catch (error) {
     const message = error instanceof Error ? error.message : "";
     const reply = message === "timeout"
-      ? "Zing AI Lab 助手这次响应超时了，请稍后再试。你也可以先通过页面联系方式联系 Zing。"
-      : "Zing AI Lab 助手暂时连接不稳定，请稍后再试。你也可以先说明行业、资料、目标和是否需要 AI 客服，我会继续帮你梳理。";
+      ? "智页 AI 助手这次响应超时了，请稍后再试。你也可以先通过页面联系方式联系智页。"
+      : "智页 AI 助手暂时连接不稳定，请稍后再试。你也可以先说明行业、资料、目标和是否需要 AI 客服，我会继续帮你梳理。";
 
     return NextResponse.json({ reply, mode: "error" }, { status: 200 });
   }
@@ -172,21 +176,21 @@ async function callDeepSeek(messages: DeepSeekMessage[]) {
 function getMockReply(message: string) {
   const lower = message.toLowerCase();
 
-  if (lower.includes("客服") || lower.includes("ai")) {
+  if (lower.includes("客服") || lower.includes("deepseek") || lower.includes("ai")) {
     return mockReplies[0];
   }
 
-  if (lower.includes("官网") || lower.includes("网站") || lower.includes("落地页")) {
+  if (lower.includes("dify") || lower.includes("coze") || lower.includes("知识库") || lower.includes("智能体")) {
     return mockReplies[1];
   }
 
-  if (lower.includes("自动化") || lower.includes("表格") || lower.includes("资料")) {
+  if (lower.includes("官网") || lower.includes("网站") || lower.includes("展示页") || lower.includes("落地页")) {
     return mockReplies[2];
   }
 
-  if (lower.includes("智能体") || lower.includes("agent")) {
+  if (lower.includes("自动化") || lower.includes("表格") || lower.includes("资料") || lower.includes("文本")) {
     return mockReplies[3];
   }
 
-  return "我可以先帮你判断适合做 DeepSeek 聊天窗口、Dify 知识库、Coze 智能体、个人品牌官网还是 NLP 分析工具。你可以简单说一下：行业或项目背景、已有资料、希望用户完成什么操作、是否需要后台管理。";
+  return "我可以先帮你判断适合做 DeepSeek 聊天窗口、Dify 知识库、Coze 智能体、项目展示页，还是文本资料整理工具。你可以简单说一下：行业或项目背景、已有资料、希望用户完成什么操作、是否需要后台管理。";
 }

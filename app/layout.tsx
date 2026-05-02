@@ -10,25 +10,25 @@ const siteUrl = getSiteUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Zing AI Lab｜AI客服、智能体原型与小企业AI应用落地",
+    default: "智页 AI Lab｜AI客服、项目展示页与小企业AI应用样板间",
     template: "%s"
   },
   description:
-    "Zing AI Lab 是面向个人、小企业、教育项目和早期团队的 AI 应用落地样板间，展示 AI 客服、DeepSeek 接入、Dify/Coze 智能体、个人品牌官网、后台管理、云数据库与 Vercel 部署实践。",
+    "智页 AI Lab 是面向个人、小企业、教育项目和早期团队的 AI 应用落地样板间，展示 AI 客服、FAQ 问答、DeepSeek 接入、Dify/Coze 方案、项目展示页、后台管理、云数据库与 Vercel 部署实践。",
   openGraph: {
-    title: "Zing AI Lab｜AI客服、智能体原型与小企业AI应用落地",
+    title: "智页 AI Lab｜AI客服、项目展示页与小企业AI应用样板间",
     description:
-      "Zing AI Lab 是面向个人、小企业、教育项目和早期团队的 AI 应用落地样板间，展示 AI 客服、DeepSeek 接入、Dify/Coze 智能体、个人品牌官网、后台管理、云数据库与 Vercel 部署实践。",
+      "智页 AI Lab 是面向个人、小企业、教育项目和早期团队的 AI 应用落地样板间，展示 AI 客服、FAQ 问答、DeepSeek 接入、Dify/Coze 方案、项目展示页、后台管理、云数据库与 Vercel 部署实践。",
     type: "website",
     locale: "zh_CN",
     url: siteUrl,
-    siteName: "Zing AI Lab",
+    siteName: "智页 AI Lab",
     images: [
       {
         url: "/ai-brand-hero.png",
         width: 960,
         height: 720,
-        alt: "Zing AI Lab AI 应用落地样板间封面图"
+        alt: "智页 AI Lab 的 AI 客服与网页应用样板间插图"
       }
     ]
   }

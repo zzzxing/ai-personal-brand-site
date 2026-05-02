@@ -280,9 +280,10 @@ function EditableServices({ items, onChange }: { items: ServiceItem[]; onChange:
             <Field label="图标标识" value={item.icon} onChange={(value) => updateArray(items, index, { ...item, icon: value }, onChange)} />
           </div>
           <TextArea label="描述" value={item.description} onChange={(value) => updateArray(items, index, { ...item, description: value }, onChange)} />
+          <Field label="适合对象" value={item.fit ?? ""} onChange={(value) => updateArray(items, index, { ...item, fit: value }, onChange)} />
         </div>
       ))}
-      <AddButton label="新增服务" onClick={() => onChange([...items, { title: "新服务", description: "服务描述", icon: "layout" }])} />
+      <AddButton label="新增服务" onClick={() => onChange([...items, { title: "新服务", description: "服务描述", icon: "layout", fit: "适合对象" }])} />
     </div>
   );
 }

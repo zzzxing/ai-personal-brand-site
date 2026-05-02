@@ -7,14 +7,14 @@ const englishPlaceholder: SiteContent = {
   ...defaultContent,
   locale: "en",
   name: defaultContent.name,
-  tagline: "Zing AI Lab | AI application showroom for individuals and small businesses",
-  heroTitle: "Zing AI Lab | AI customer service, agent prototypes, and small-business AI applications",
+  tagline: "Zhiye AI Lab | Turn AI ideas into accessible web applications",
+  heroTitle: "Zhiye AI Lab | Turn AI ideas into accessible web applications",
   heroSubtitle:
-    "The Chinese homepage is the primary version. This route is reserved for a future English version of the Zing AI Lab AI application showroom.",
+    "The Chinese homepage is the primary version. This route is reserved for a future English version of the Zhiye AI Lab service page and AI application showroom.",
   seo: {
-    title: "Zing AI Lab | AI Application Showroom",
-    description: "A bilingual-ready AI application showroom for AI customer service, agent prototypes, small-business landing pages, and automation tools.",
-    keywords: ["Zing AI Lab", "AI customer service", "DeepSeek", "Dify", "Coze", "Vercel"]
+    title: "Zhiye AI Lab | AI Customer Service and Web Application Showroom",
+    description: "A bilingual-ready AI application showroom for AI customer service, FAQ pages, project pages, small-business landing pages, and automation prototypes.",
+    keywords: ["Zhiye AI Lab", "AI customer service", "DeepSeek", "Dify", "Coze", "Vercel"]
   }
 };
 
