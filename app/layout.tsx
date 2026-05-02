@@ -6,19 +6,20 @@ import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const siteUrl = getSiteUrl();
+const title = "智页 AI Lab｜AI客服、项目展示页与轻量AI网页原型";
+const description =
+  "智页 AI Lab 是一个面向个人、小企业和项目团队的 AI 应用样板间，展示如何把 AI 客服、FAQ 问答、项目展示页、知识库问答和自动化工具原型做成可访问、可演示、可继续迭代的网页应用。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "智页 AI Lab｜AI客服、项目展示页与小企业AI应用样板间",
+    default: title,
     template: "%s"
   },
-  description:
-    "智页 AI Lab 是面向个人、小企业、教育项目和早期团队的 AI 应用落地样板间，展示 AI 客服、FAQ 问答、DeepSeek 接入、Dify/Coze 方案、项目展示页、后台管理、云数据库与 Vercel 部署实践。",
+  description,
   openGraph: {
-    title: "智页 AI Lab｜AI客服、项目展示页与小企业AI应用样板间",
-    description:
-      "智页 AI Lab 是面向个人、小企业、教育项目和早期团队的 AI 应用落地样板间，展示 AI 客服、FAQ 问答、DeepSeek 接入、Dify/Coze 方案、项目展示页、后台管理、云数据库与 Vercel 部署实践。",
+    title,
+    description,
     type: "website",
     locale: "zh_CN",
     url: siteUrl,
@@ -31,6 +32,12 @@ export const metadata: Metadata = {
         alt: "智页 AI Lab 的 AI 客服与网页应用样板间插图"
       }
     ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/ai-brand-hero.png"]
   }
 };
 
