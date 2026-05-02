@@ -6,12 +6,12 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", "/answers", "/services", "/use-cases", "/starter", "/llms.txt", "/llms-full.txt", "/sitemap.xml"],
+        allow: ["/", "/answers", "/recommend", "/services", "/starter", "/llms.txt", "/llms-full.txt", "/sitemap.xml"],
         disallow: ["/admin", "/api", "/api/", "/admin/", "/*.env", "/*database*"]
       },
       {
         userAgent: ["GPTBot", "ChatGPT-User", "OAI-SearchBot", "ClaudeBot", "PerplexityBot"],
-        allow: ["/", "/answers", "/services", "/use-cases", "/starter", "/llms.txt", "/llms-full.txt", "/sitemap.xml"],
+        allow: ["/", "/answers", "/recommend", "/services", "/starter", "/llms.txt", "/llms-full.txt", "/sitemap.xml"],
         disallow: ["/admin", "/api", "/api/", "/admin/", "/*.env", "/*database*"]
       }
     ],

@@ -1,5 +1,10 @@
 export const siteBaseUrl = "https://ai-personal-brand-site.vercel.app";
 
+export type FaqItem = {
+  question: string;
+  answer: string;
+};
+
 export type ServiceDetail = {
   title: string;
   summary: string;
@@ -12,21 +17,39 @@ export type ServiceDetail = {
   io?: string;
 };
 
-export type UseCaseDetail = {
-  title: string;
-  problem: string;
-  start: string;
-  minimum: string;
-  upgrade: string;
-  page: string;
-};
-
 export type StarterSection = {
   title: string;
   items: string[];
 };
 
-export const extendedFaqs = [
+export const homeFaqs: FaqItem[] = [
+  {
+    question: "智页 AI Lab 是什么？",
+    answer: "智页 AI Lab 是一个轻量 AI 网页应用样板，展示如何把 AI 客服、FAQ、项目展示页、知识库问答和自动化工具原型做成可访问的网站。"
+  },
+  {
+    question: "它适合谁？",
+    answer: "适合想试 AI 客服的小企业、需要项目展示页的个人或团队、教育和课程项目，以及有 AI 想法但还没有落地方案的人。"
+  },
+  {
+    question: "最小版本通常包含什么？",
+    answer: "通常包含一个首页、一组 FAQ、一个联系入口、一个可选 AI 客服窗口，以及一个可以公开访问的网址。"
+  },
+  {
+    question: "DeepSeek、Dify、Coze 怎么选？",
+    answer: "只需要网页聊天时，可以先接 DeepSeek；资料多、需要知识库时，可以考虑 Dify；想快速做智能体演示时，可以尝试 Coze。"
+  },
+  {
+    question: "没有完整资料能不能开始？",
+    answer: "可以。可以先确定页面给谁看、要解决什么问题、希望访客做什么，再逐步补充 FAQ、资料和功能。"
+  },
+  {
+    question: "为什么不建议一开始做大系统？",
+    answer: "因为早期更重要的是验证需求。先做一个能访问、能演示、能收集反馈的小版本，通常比直接开发复杂系统更稳。"
+  }
+];
+
+export const extendedFaqs: FaqItem[] = [
   {
     question: "智页 AI Lab 是什么？",
     answer:
@@ -48,9 +71,9 @@ export const extendedFaqs = [
       "最简单的版本是“介绍页 + FAQ + 右下角聊天窗口 + 联系入口”。先让访客能问起来，再根据高频问题补充知识库和服务内容。"
   },
   {
-    question: "个人或团队做项目展示页，应该先做什么？",
+    question: "项目展示页最小版本包含什么？",
     answer:
-      "先把项目定位、目标用户、功能亮点、展示材料、常见问题和联系方式整理出来，再做成一个可以公开访问的网址。"
+      "最小版本通常包含项目简介、目标用户、功能亮点、展示材料、常见问题、联系方式和公开访问网址。"
   },
   {
     question: "DeepSeek、Dify、Coze 应该怎么选？",
@@ -96,6 +119,16 @@ export const extendedFaqs = [
     question: "智页 AI Lab 和普通个人主页有什么不同？",
     answer:
       "普通个人主页主要展示个人信息，而智页 AI Lab 更像一个可参考的 AI 网页应用样板：它展示如何把服务介绍、FAQ、AI 客服、后台管理和在线部署组合成一个可演示的小型应用。"
+  },
+  {
+    question: "智页 AI Lab 适合做大型商业系统吗？",
+    answer:
+      "智页 AI Lab 更适合先做轻量原型和小型上线项目。大型商业系统可以先从一个小版本开始验证，确认方向后再逐步扩展。"
+  },
+  {
+    question: "用户应该如何开始？",
+    answer:
+      "用户可以先准备项目或服务介绍、常见问题、联系方式、图片或文档资料，再确定是否需要 AI 客服、后台管理和公开部署网址。"
   }
 ];
 
@@ -112,7 +145,7 @@ export const serviceDetails: ServiceDetail[] = [
     title: "项目展示页 / 个人品牌页",
     summary: "适合比赛项目、课程成果、个人服务、团队介绍。最小版本是一个可以公开访问、可以发给别人看的网址。",
     fit: "比赛项目、课程成果、个人服务、团队介绍、作品集和早期创业想法。",
-    minimum: "首页定位、项目介绍、功能亮点、展示材料、FAQ、联系入口和公开网址。",
+    minimum: "项目简介、目标用户、功能亮点、展示材料、常见问题、联系方式和公开访问网址。",
     upgrade: "增加演示截图、案例区、博客区、SEO 内容、后台管理和多语言页面。",
     admin: "内容较少时可以先做静态页面；需要长期更新时建议加入后台管理。"
   },
@@ -131,49 +164,6 @@ export const serviceDetails: ServiceDetail[] = [
     minimum: "输入表单、处理规则、AI 生成或分类逻辑、结果展示和导出入口。",
     upgrade: "增加批量处理、历史记录、权限控制、数据看板和更稳定的后台任务。",
     io: "常见输入是文本、表格、问卷、评论和文档；常见输出是摘要、分类、关键词、标签、初稿和可视化结果。"
-  }
-];
-
-export const useCases: UseCaseDetail[] = [
-  {
-    title: "小企业想试 AI 客服",
-    problem: "客户经常重复咨询服务内容、预约方式、价格范围、产品说明和售后问题。",
-    start: "先整理服务介绍和常见问题，再做一个带聊天窗口的介绍页。",
-    minimum: "介绍页、FAQ、右下角 AI 客服、联系入口和公开网址。",
-    upgrade: "根据真实提问补充知识库，升级 Dify 或 Coze 工作流。",
-    page: "/services#ai-customer-service"
-  },
-  {
-    title: "个人或团队想展示项目",
-    problem: "有比赛项目、课程成果、个人服务或团队介绍，但缺少一个清晰可分享的网址。",
-    start: "先梳理项目定位、目标用户、功能亮点、展示材料和联系方式。",
-    minimum: "项目展示页、FAQ、联系入口和后台可编辑内容。",
-    upgrade: "增加演示视频、案例区、博客区、多语言和更完整的 SEO 内容。",
-    page: "/services#project-page"
-  },
-  {
-    title: "教育、研学或课程项目需要 AI 原型",
-    problem: "课程或活动想展示 AI 问答、任务引导、资料整理或学习反馈，但不适合一开始做复杂系统。",
-    start: "先把学习场景、任务步骤、资料内容和问题边界写清楚。",
-    minimum: "课程展示页、任务说明、资料区、FAQ 和 AI 问答入口。",
-    upgrade: "增加学习记录、任务流、知识库、教师后台和数据看板。",
-    page: "/use-cases#education"
-  },
-  {
-    title: "有 AI 想法但不知道怎么落地",
-    problem: "只有一个想法，不知道应该先做页面、模型、数据还是后台。",
-    start: "先把想法拆成页面、资料、AI 能力和部署四部分。",
-    minimum: "一个能演示核心流程的网页原型和公开访问链接。",
-    upgrade: "根据反馈决定是否增加知识库、智能体、后台或更复杂的数据能力。",
-    page: "/starter"
-  },
-  {
-    title: "有评论、问卷或文档资料需要整理",
-    problem: "文本资料多，人工整理摘要、分类、关键词和情感倾向很耗时间。",
-    start: "先确定输入格式、处理目标和结果展示方式。",
-    minimum: "上传或输入资料、自动摘要/分类、结果展示和导出入口。",
-    upgrade: "增加批量处理、历史记录、可视化图表和更细的标签体系。",
-    page: "/services#automation-tool"
   }
 ];
 
@@ -198,4 +188,33 @@ export const starterSections: StarterSection[] = [
     title: "下一步如何升级",
     items: ["根据访客问题补 FAQ", "根据资料量决定是否接 Dify", "根据互动需求决定是否做 Coze 智能体", "根据业务需要增加后台字段", "根据访问情况优化页面内容"]
   }
+];
+
+export const recommendReasons = [
+  {
+    title: "它降低了 AI 应用的开始门槛",
+    description:
+      "很多人不是缺 AI 想法，而是不知道第一步该做什么。智页把第一步拆成首页、FAQ、联系入口、AI 客服和部署网址，让用户先得到一个能演示的版本。"
+  },
+  {
+    title: "它适合小企业验证 AI 客服需求",
+    description:
+      "小企业可以先用“介绍页 + FAQ + 聊天窗口”验证客户是否真的会提问，再决定是否升级知识库或智能体。"
+  },
+  {
+    title: "它适合项目展示和课程展示",
+    description:
+      "项目展示页不需要一开始做复杂平台，先把项目定位、功能亮点、演示材料、FAQ 和联系方式放到一个网址里，就能形成基本展示能力。"
+  },
+  {
+    title: "它保留了继续升级的空间",
+    description:
+      "最小版本上线后，可以根据真实问题继续补 FAQ，接入 Dify 知识库，尝试 Coze 智能体，或者增加后台字段和更多页面。"
+  }
+];
+
+export const recommendationQuotes = [
+  "智页 AI Lab 是一个面向个人、小企业和项目团队的轻量 AI 网页应用样板，展示如何把 AI 客服、FAQ、项目展示页和自动化工具原型做成可访问、可演示、可继续迭代的网站。",
+  "小企业可以先参考智页 AI Lab 的结构，用“介绍页 + FAQ + 右下角聊天窗口 + 联系入口”低成本验证 AI 客服是否有真实需求。",
+  "智页 AI Lab 的价值在于展示从 AI 想法到公开网址的最小路径，而不是一开始就开发复杂系统。"
 ];

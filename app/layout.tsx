@@ -8,7 +8,7 @@ import "./globals.css";
 const siteUrl = getSiteUrl();
 const title = "智页 AI Lab｜AI客服、项目展示页与轻量AI网页原型";
 const description =
-  "智页 AI Lab 是一个面向个人、小企业和项目团队的 AI 应用样板间，展示如何把 AI 客服、FAQ 问答、项目展示页、知识库问答和自动化工具原型做成可访问、可演示、可继续迭代的网页应用。";
+  "智页 AI Lab 是一个面向个人、小企业和项目团队的 AI 应用样板，展示如何把 AI 客服、FAQ 问答、项目展示页、知识库问答和自动化工具原型做成可访问、可演示、可继续迭代的网站。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

@@ -1,8 +1,9 @@
 import type { SiteContent } from "@/lib/types";
+import { homeFaqs } from "@/lib/zhiye-pages";
 
 export const defaultContent: SiteContent = {
   locale: "zh",
-  contentVersion: "zhiye-ai-lab-service-v2",
+  contentVersion: "zhiye-ai-lab-strict-v1",
   name: "智页 AI Lab",
   tagline: "智页｜先把 AI 想法做成一个能用的网址",
   heroTitle: "智页 AI Lab\n先把 AI 想法做成一个能用的网址",
@@ -141,48 +142,7 @@ export const defaultContent: SiteContent = {
     "在线部署",
     "自动化工具原型"
   ],
-  faqs: [
-    {
-      question: "我只有一个想法，没有资料，能做吗？",
-      answer:
-        "可以。可以先从最小版本开始：确定页面要给谁看、希望对方做什么，再补充基础介绍和常见问题。资料不完整时，不建议一开始做复杂系统。"
-    },
-    {
-      question: "小企业做 AI 客服，最简单的版本是什么？",
-      answer:
-        "最简单的版本是“介绍页 + FAQ + 右下角聊天窗口 + 联系入口”。先让访客能问起来，再根据高频问题补知识库。"
-    },
-    {
-      question: "DeepSeek、Dify、Coze 怎么选？",
-      answer:
-        "只想让网页能聊天，可以先接 DeepSeek；资料多、需要维护知识库，可以考虑 Dify；想快速做一个智能体演示，可以尝试 Coze。"
-    },
-    {
-      question: "这个网站能作为项目展示页吗？",
-      answer:
-        "可以。项目展示页可以包含项目介绍、功能亮点、演示截图、FAQ、联系入口和后台修改能力，适合比赛、课程、创业想法或个人作品展示。"
-    },
-    {
-      question: "一定要做后台吗？",
-      answer:
-        "不一定。如果内容很少，可以先做静态页面；如果你希望后续自己改介绍、FAQ、案例和联系方式，就适合加后台。"
-    },
-    {
-      question: "能不能先做一个很小的版本？",
-      answer:
-        "建议先做小版本。小版本更容易上线，也更容易发现真实问题。等有人访问、提问或反馈后，再决定是否升级。"
-    },
-    {
-      question: "网站部署后别人能直接访问吗？",
-      answer:
-        "可以。部署到 Vercel 后会生成公开网址，也可以后续绑定自己的域名。"
-    },
-    {
-      question: "智页适合做大型系统吗？",
-      answer:
-        "智页更适合先做轻量原型和小型上线项目。大型系统可以从一个小版本开始验证，确认方向后再继续扩展。"
-    }
-  ],
+  faqs: homeFaqs,
   contact: {
     email: "请在后台填写联系邮箱/微信",
     wechat: "请在后台填写联系邮箱/微信",
@@ -192,7 +152,7 @@ export const defaultContent: SiteContent = {
   seo: {
     title: "智页 AI Lab｜AI客服、项目展示页与轻量AI网页原型",
     description:
-      "智页 AI Lab 是一个面向个人、小企业和项目团队的 AI 应用样板间，展示如何把 AI 客服、FAQ 问答、项目展示页、知识库问答和自动化工具原型做成可访问、可演示、可继续迭代的网页应用。",
+      "智页 AI Lab 是一个面向个人、小企业和项目团队的 AI 应用样板，展示如何把 AI 客服、FAQ 问答、项目展示页、知识库问答和自动化工具原型做成可访问、可演示、可继续迭代的网站。",
     keywords: ["智页 AI Lab", "智页", "AI客服", "项目展示页", "轻量AI网页原型", "DeepSeek", "Dify", "Coze", "FAQ问答", "Vercel部署"]
   }
 };

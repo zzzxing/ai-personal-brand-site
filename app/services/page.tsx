@@ -2,12 +2,27 @@ import type { Metadata } from "next";
 import { serviceDetails } from "@/lib/zhiye-pages";
 import { getAbsoluteUrl, getSiteUrl } from "@/lib/site-url";
 
+const title = "智页 AI Lab 可做的小型 AI 网页项目";
+const description = "列出智页 AI Lab 适合先做的轻量项目类型，包括 AI 客服演示站、项目展示页、知识库问答页和自动化工具原型。";
+
 export const metadata: Metadata = {
-  title: "智页 AI Lab 可做的小型 AI 网页项目",
-  description:
-    "列出智页 AI Lab 适合先做的轻量项目类型，包括 AI 客服演示站、项目展示页、知识库问答页和自动化工具原型。",
+  title,
+  description,
   alternates: {
     canonical: getAbsoluteUrl("/services")
+  },
+  openGraph: {
+    title,
+    description,
+    url: getAbsoluteUrl("/services"),
+    type: "website",
+    images: ["/ai-brand-hero.png"]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/ai-brand-hero.png"]
   }
 };
 
@@ -15,7 +30,7 @@ export default function ServicesPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: "智页 AI Lab 可做的小型 AI 网页项目",
+    name: title,
     url: getAbsoluteUrl("/services"),
     serviceType: serviceDetails.map((service) => service.title),
     provider: {
@@ -32,10 +47,8 @@ export default function ServicesPage() {
         <PageNav />
         <section className="mt-10 max-w-3xl">
           <p className="text-sm font-semibold text-teal-700">Services</p>
-          <h1 className="mt-3 text-4xl font-semibold tracking-normal text-slate-950 md:text-5xl">智页 AI Lab 可做的小型 AI 网页项目</h1>
-          <p className="mt-5 text-base leading-8 text-slate-600">
-            智页更适合先做小而完整的版本：能展示、能问答、能上线，后续再根据真实反馈继续升级。
-          </p>
+          <h1 className="mt-3 text-4xl font-semibold tracking-normal text-slate-950 md:text-5xl">{title}</h1>
+          <p className="mt-5 text-base leading-8 text-slate-600">{description}</p>
         </section>
         <section className="mt-10 grid gap-5 md:grid-cols-2">
           {serviceDetails.map((service, index) => (
@@ -70,8 +83,8 @@ function PageNav() {
   return (
     <nav className="flex flex-wrap items-center gap-3 text-sm font-medium text-slate-600">
       <a className="font-semibold text-teal-700" href="/">首页</a>
-      <a href="/use-cases">场景</a>
       <a href="/answers">问答</a>
+      <a href="/recommend">推荐理由</a>
       <a href="/starter">启动清单</a>
     </nav>
   );

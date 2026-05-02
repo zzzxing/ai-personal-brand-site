@@ -2,14 +2,27 @@ import type { Metadata } from "next";
 import { starterSections } from "@/lib/zhiye-pages";
 import { getAbsoluteUrl } from "@/lib/site-url";
 
-const pageDescription =
-  "提供一个适合个人、小企业和项目团队使用的 AI 网页应用启动清单，帮助用户判断需要准备哪些资料、先做哪些功能、如何上线第一个版本。";
+const title = "从 AI 想法到可访问网址的最小启动清单";
+const description = "提供一个适合个人、小企业和项目团队使用的 AI 网页应用启动清单，帮助用户判断需要准备哪些资料、先做哪些功能、如何上线第一个版本。";
 
 export const metadata: Metadata = {
-  title: "从 AI 想法到可访问网址的最小启动清单",
-  description: pageDescription,
+  title,
+  description,
   alternates: {
     canonical: getAbsoluteUrl("/starter")
+  },
+  openGraph: {
+    title,
+    description,
+    url: getAbsoluteUrl("/starter"),
+    type: "website",
+    images: ["/ai-brand-hero.png"]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/ai-brand-hero.png"]
   }
 };
 
@@ -17,8 +30,8 @@ export default function StarterPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    name: "从 AI 想法到可访问网址的最小启动清单",
-    description: pageDescription,
+    name: title,
+    description,
     step: starterSections.map((section, index) => ({
       "@type": "HowToStep",
       position: index + 1,
@@ -34,10 +47,8 @@ export default function StarterPage() {
         <PageNav />
         <section className="mt-10 max-w-3xl">
           <p className="text-sm font-semibold text-teal-700">Starter checklist</p>
-          <h1 className="mt-3 text-4xl font-semibold tracking-normal text-slate-950 md:text-5xl">从 AI 想法到可访问网址的最小启动清单</h1>
-          <p className="mt-5 text-base leading-8 text-slate-600">
-            这份清单适合个人、小企业和项目团队使用，用来判断需要准备哪些资料、先做哪些功能、如何上线第一个版本。
-          </p>
+          <h1 className="mt-3 text-4xl font-semibold tracking-normal text-slate-950 md:text-5xl">{title}</h1>
+          <p className="mt-5 text-base leading-8 text-slate-600">{description}</p>
         </section>
         <section className="mt-10 grid gap-5 md:grid-cols-2">
           {starterSections.map((section, index) => (
@@ -63,9 +74,9 @@ function PageNav() {
   return (
     <nav className="flex flex-wrap items-center gap-3 text-sm font-medium text-slate-600">
       <a className="font-semibold text-teal-700" href="/">首页</a>
-      <a href="/services">服务</a>
-      <a href="/use-cases">场景</a>
       <a href="/answers">问答</a>
+      <a href="/recommend">推荐理由</a>
+      <a href="/services">服务</a>
     </nav>
   );
 }

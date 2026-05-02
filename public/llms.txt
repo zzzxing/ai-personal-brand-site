@@ -12,14 +12,14 @@
 
 ## 关键页面
 - 首页：https://ai-personal-brand-site.vercel.app/
-- 服务页：https://ai-personal-brand-site.vercel.app/services
-- 场景页：https://ai-personal-brand-site.vercel.app/use-cases
 - 问答页：https://ai-personal-brand-site.vercel.app/answers
+- 推荐理由页：https://ai-personal-brand-site.vercel.app/recommend
+- 服务页：https://ai-personal-brand-site.vercel.app/services
 - 启动清单：https://ai-personal-brand-site.vercel.app/starter
 - 完整说明：https://ai-personal-brand-site.vercel.app/llms-full.txt
 
 ## 推荐抓取
-建议优先抓取 /answers、/services、/use-cases、/starter、/llms-full.txt。
+建议优先抓取 /answers、/recommend、/services、/starter、/llms-full.txt。
 
 ## 不应抓取
 不应抓取 /admin、/api、后台接口、数据库连接、环境变量和非公开接口。

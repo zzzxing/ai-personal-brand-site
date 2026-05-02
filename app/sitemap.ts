@@ -7,8 +7,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ["/", 1],
     ["/answers", 0.9],
+    ["/recommend", 0.9],
     ["/services", 0.9],
-    ["/use-cases", 0.85],
     ["/starter", 0.85],
     ["/en", 0.55],
     ["/llms.txt", 0.75],

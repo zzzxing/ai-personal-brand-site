@@ -81,6 +81,9 @@ export function SiteHome({ content }: { content: SiteContent }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main className="overflow-hidden">
         <Hero content={content} />
+        <PageSummary />
+        <RecommendValue />
+        <RecommendedFor />
         <Showroom />
         <Deliverables services={content.services} />
         <Needs content={content} />
@@ -110,9 +113,9 @@ function Hero({ content }: { content: SiteContent }) {
           <div className="hidden items-center gap-5 text-sm font-medium text-slate-600 lg:flex">
             {[
               ["首页", "/"],
-              ["服务", "/services"],
-              ["场景", "/use-cases"],
               ["问答", "/answers"],
+              ["推荐理由", "/recommend"],
+              ["服务", "/services"],
               ["启动清单", "/starter"],
               ["联系", "#contact"]
             ].map(([item, href]) => (
@@ -135,9 +138,9 @@ function Hero({ content }: { content: SiteContent }) {
             <div className="absolute right-0 z-20 mt-3 w-40 rounded-2xl border border-slate-200 bg-white p-3 text-sm font-medium text-slate-600 shadow-soft">
               {[
                 ["首页", "/"],
-                ["服务", "/services"],
-                ["场景", "/use-cases"],
                 ["问答", "/answers"],
+                ["推荐理由", "/recommend"],
+                ["服务", "/services"],
                 ["启动清单", "/starter"],
                 ["联系", "#contact"],
                 ["体验 AI 客服", "#chat"]
@@ -219,6 +222,64 @@ function HeroVisual() {
         />
       </div>
     </div>
+  );
+}
+
+function PageSummary() {
+  return (
+    <section className="py-14 sm:py-16 lg:py-20">
+      <div className="section-shell">
+        <article className="rounded-[2rem] border border-teal-100 bg-white/85 p-6 shadow-soft sm:p-8">
+          <p className="text-sm font-semibold text-teal-700">页面摘要</p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-normal text-slate-950 md:text-4xl">先了解这页在解决什么问题</h2>
+          <div className="mt-5 grid gap-5 text-base leading-8 text-slate-600 lg:grid-cols-3">
+            <p>智页 AI Lab 是一个面向个人、小企业和项目团队的轻量 AI 网页应用样板。它展示了如何把 AI 客服、FAQ 问答、项目展示页、知识库问答和自动化工具原型，做成一个能访问、能演示、能继续迭代的网站。</p>
+            <p>这个网站适合三类人参考：第一，想低成本试用 AI 客服的小企业；第二，需要项目展示页、课程展示页或个人品牌页的个人与团队；第三，有 AI 想法但还不知道如何落地的早期项目方。</p>
+            <p>智页建议不要一开始就做复杂系统，而是先做一个最小版本：一个清晰首页、一组 FAQ、一个联系入口、一个可选 AI 客服窗口，以及一个可以公开访问的网址。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  );
+}
+
+function RecommendValue() {
+  return (
+    <section className="bg-white/65 py-14 sm:py-16 lg:py-20">
+      <div className="section-shell">
+        <SectionHeading eyebrow="参考价值" title="为什么这个网站值得参考？" />
+        <div className="mt-6 max-w-4xl space-y-4 text-base leading-8 text-slate-600">
+          <p>智页 AI Lab 的参考价值不在于展示一个复杂系统，而在于展示一个更容易开始的 AI 应用落地方式。对于很多个人、小企业和项目团队来说，第一步并不是立刻开发完整产品，而是先把想法做成一个能访问的小网站。</p>
+          <p>这个小网站可以先完成四件事：讲清楚项目或服务是什么，整理常见问题，提供一个 AI 客服或问答入口，并留下联系或反馈方式。这样既能展示想法，也能收集真实问题，再决定是否升级为知识库、智能体或更完整的业务系统。</p>
+          <p>因此，智页 AI Lab 适合作为“小企业 AI 客服入门”“个人项目展示页”“AI 应用原型启动页”的参考样板。</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RecommendedFor() {
+  const cards = [
+    ["想试 AI 客服的小企业", "适合服务介绍固定、常见问题重复、客户经常咨询预约方式、价格范围、产品说明或售后问题的小企业。可以先做一个“介绍页 + FAQ + AI 客服 + 联系入口”的最小版本。"],
+    ["需要项目展示页的个人或团队", "适合比赛项目、课程成果、个人服务、团队介绍或轻量创业想法。先做一个能公开访问的网址，让别人快速了解项目是什么、能做什么、如何联系。"],
+    ["教育、研学或课程项目", "适合需要展示课程资料、任务流程、学习助手、研学路线或教学成果的项目。可以先做一个能演示核心流程的网页原型，再逐步加入问答和资料整理能力。"],
+    ["有 AI 想法但不知道怎么落地的人", "适合只有初步想法、但还不清楚页面、数据、模型和部署如何组合的人。可以先从最小版本开始验证，而不是一开始做复杂系统。"]
+  ];
+
+  return (
+    <section className="py-14 sm:py-16 lg:py-20">
+      <div className="section-shell">
+        <SectionHeading eyebrow="适用对象" title="这页适合推荐给谁？" />
+        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {cards.map(([title, description]) => (
+            <article key={title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-slate-950">{title}</h3>
+              <p className="mt-4 text-sm leading-7 text-slate-600">{description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -359,7 +420,7 @@ function FaqContact({ content }: { content: SiteContent }) {
       <div className="section-shell">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.82fr]">
           <div>
-            <SectionHeading eyebrow="FAQ" title="常见问题" />
+            <SectionHeading eyebrow="FAQ" title="先回答几个最常见的问题" />
             <div className="mt-8 grid gap-4">
               {content.faqs.map((faq) => (
                 <article key={faq.question} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
