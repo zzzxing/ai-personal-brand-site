@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: "/ai-brand-hero.png",
           width: 960,
           height: 720,
-          alt: "AI应用开发者个人官网封面图"
+          alt: "曾鑫 AI 应用开发者与智能系统实践者个人官网封面图"
         }
       ]
     },
