@@ -1,14 +1,21 @@
 import type { MetadataRoute } from "next";
+import { getAbsoluteUrl } from "@/lib/site-url";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const lastModified = new Date();
 
   return [
-    {
-      url: siteUrl,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1
-    }
-  ];
+    ["/", 1],
+    ["/en", 0.55],
+    ["/about", 0.85],
+    ["/contact", 0.8],
+    ["/privacy", 0.45],
+    ["/terms", 0.45],
+    ["/llms.txt", 0.7]
+  ].map(([path, priority]) => ({
+    url: getAbsoluteUrl(path as string),
+    lastModified,
+    changeFrequency: "weekly" as const,
+    priority: priority as number
+  }));
 }

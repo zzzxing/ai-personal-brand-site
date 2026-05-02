@@ -1,22 +1,23 @@
 import type { Metadata } from "next";
 import { SiteHome } from "@/components/site-home";
 import { getSiteContent } from "@/lib/content";
+import { getAbsoluteUrl, getSiteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getSiteContent();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const siteUrl = getSiteUrl();
 
   return {
     title: content.seo.title,
     description: content.seo.description,
     keywords: content.seo.keywords,
     alternates: {
-      canonical: siteUrl,
+      canonical: getAbsoluteUrl("/"),
       languages: {
-        "zh-CN": siteUrl,
-        en: `${siteUrl}/en`
+        "zh-CN": getAbsoluteUrl("/"),
+        en: getAbsoluteUrl("/en")
       }
     },
     openGraph: {

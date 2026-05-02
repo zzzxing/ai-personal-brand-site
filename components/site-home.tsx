@@ -2,6 +2,7 @@ import {
   ArrowRight,
   Bot,
   BriefcaseBusiness,
+  CalendarDays,
   CheckCircle2,
   ChevronRight,
   ExternalLink,
@@ -19,6 +20,7 @@ import {
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { AiChatWidget } from "@/components/ai-chat-widget";
+import { getSiteUrl } from "@/lib/site-url";
 import type { ServiceItem, SiteContent } from "@/lib/types";
 
 const serviceIconMap = {
@@ -30,14 +32,46 @@ const serviceIconMap = {
 };
 
 export function SiteHome({ content }: { content: SiteContent }) {
+  const siteUrl = getSiteUrl();
+  const updatedAt = content.updatedAt || "2026-05-02";
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: content.name,
-    jobTitle: "AI Application Developer",
-    description: content.seo.description,
-    knowsAbout: content.skills,
-    email: content.contact.email
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${siteUrl || "https://example.com"}#person`,
+        name: content.name,
+        jobTitle: "AI Application Developer",
+        description: content.seo.description,
+        knowsAbout: content.skills,
+        email: content.contact.email
+      },
+      {
+        "@type": "WebSite",
+        name: "AI应用开发者个人品牌官网",
+        url: siteUrl || undefined,
+        inLanguage: "zh-CN",
+        description: content.seo.description
+      },
+      {
+        "@type": "ProfessionalService",
+        name: `${content.name} AI 应用开发服务`,
+        serviceType: ["AI 客服", "网站原型", "智能体工作流", "自动化工具"],
+        areaServed: "China",
+        email: content.contact.email
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: content.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer
+          }
+        }))
+      }
+    ]
   };
 
   return (
@@ -49,12 +83,16 @@ export function SiteHome({ content }: { content: SiteContent }) {
       <main className="overflow-hidden">
         <Hero content={content} />
         <Services services={content.services} />
+        <StarterProjects />
+        <Evidence />
         <Audience content={content} />
         <Projects content={content} />
         <Process content={content} />
         <Skills content={content} />
+        <Trust content={content} updatedAt={updatedAt} />
         <FaqContact content={content} />
       </main>
+      <Footer content={content} updatedAt={updatedAt} />
       <AiChatWidget />
     </>
   );
@@ -121,6 +159,9 @@ function Hero({ content }: { content: SiteContent }) {
                 </div>
               ))}
             </div>
+            <p className="mt-6 max-w-2xl text-sm leading-7 text-slate-500">
+              {content.name} 是这个个人品牌的项目名，代表“用 AI 把想法快速做成可展示、可验证的小应用”。如果你已经有真实姓名、邮箱和微信，可以在后台替换成你的个人信息。
+            </p>
           </div>
 
           <HeroVisual />
@@ -146,21 +187,21 @@ function HeroVisual() {
         <div className="rounded-[1.5rem] border border-slate-200 bg-white p-4">
           <div className="mb-4 flex items-center justify-between">
             <div>
-              <p className="text-xs font-medium uppercase text-slate-400">AI Service Console</p>
-              <p className="mt-1 text-lg font-semibold text-slate-950">访客咨询转化面板</p>
+              <p className="text-xs font-medium uppercase text-slate-400">Capability Preview</p>
+              <p className="mt-1 text-lg font-semibold text-slate-950">AI 应用能力演示面板</p>
             </div>
             <div className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
-              在线演示
+              非真实业务数据
             </div>
           </div>
           <div className="grid gap-3 sm:grid-cols-3">
             {[
-              ["42", "咨询线索", "text-teal-700"],
-              ["86%", "FAQ 命中", "text-blue-700"],
-              ["3.2x", "响应效率", "text-amber-700"]
+              ["客服入口", "回答常见问题", "text-teal-700"],
+              ["内容后台", "修改服务案例", "text-blue-700"],
+              ["上线部署", "接入 Vercel", "text-amber-700"]
             ].map(([value, label, color]) => (
               <div key={label} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <p className={`text-2xl font-semibold ${color}`}>{value}</p>
+                <p className={`text-lg font-semibold ${color}`}>{value}</p>
                 <p className="mt-1 text-xs text-slate-500">{label}</p>
               </div>
             ))}
@@ -181,7 +222,7 @@ function HeroVisual() {
               </div>
             </div>
             <div className="rounded-2xl border border-slate-200 p-4">
-              <p className="text-sm font-semibold text-slate-900">本周可交付内容</p>
+              <p className="text-sm font-semibold text-slate-900">首版项目能力模块</p>
               <div className="mt-4 space-y-3">
                 {[
                   ["品牌首页", 92],
@@ -238,6 +279,116 @@ function Services({ services }: { services: ServiceItem[] }) {
   );
 }
 
+function StarterProjects() {
+  const items = [
+    {
+      title: "AI 客服演示站",
+      description: "适合小企业先把服务介绍、常见问题和联系入口整理成一个可演示的 AI 咨询窗口。",
+      icon: Bot
+    },
+    {
+      title: "个人/小企业落地页",
+      description: "适合先建立专业主页，把定位、服务对象、案例方向、FAQ 和联系方式讲清楚。",
+      icon: LayoutTemplate
+    },
+    {
+      title: "自动化资料整理工具",
+      description: "适合把表单、表格、资料摘要、内容初稿等重复流程做成轻量工具。",
+      icon: Workflow
+    }
+  ];
+
+  return (
+    <section className="bg-white py-20 sm:py-24">
+      <div className="section-shell">
+        <SectionHeading
+          eyebrow="当前适合先做的小项目"
+          title="先从真实、轻量、能上线的 3 类项目开始"
+          description="这些方向不需要一开始就做成大型系统，更适合起步阶段快速展示能力、收集反馈，并逐步沉淀为真实案例。"
+        />
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          {items.map((item) => {
+            const Icon = item.icon;
+            return (
+              <article key={item.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-teal-700 shadow-sm">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-semibold text-slate-950">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-slate-600">{item.description}</p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Evidence() {
+  const stats = [
+    ["3类", "更适合起步阶段先验证的小项目"],
+    ["5类", "网站、AI 客服、智能体、自动化、小程序原型"],
+    ["4页", "关于、联系、隐私、条款信任页面"],
+    ["2套", "Dify 与 Coze 客服接入预留"],
+    ["90+", "面向 geocheck 与 Lighthouse 的优化目标"]
+  ];
+
+  return (
+    <section className="bg-white py-20 sm:py-24">
+      <div className="section-shell">
+        <SectionHeading
+          eyebrow="可引用摘要"
+          title="这个网站面向小企业 AI 应用获客，优先交付可上线、可演示、可持续优化的版本"
+          description="我提供个人品牌官网、AI 客服演示、智能体工作流和自动化工具原型，适合预算有限但需要快速验证服务表达的小企业、老师、个人品牌和轻量创业项目。"
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-5">
+          {stats.map(([value, label]) => (
+            <div key={label} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-center">
+              <p className="text-3xl font-semibold text-teal-700">{value}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{label}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          <ReferenceCard
+            title="Vercel"
+            href="https://vercel.com/docs"
+            description="用于 Next.js 项目部署、环境变量、Serverless Functions 和自动化预览部署，是本项目首选上线平台。"
+          />
+          <ReferenceCard
+            title="Neon Postgres"
+            href="https://neon.com/docs/guides/vercel"
+            description="通过 Vercel 集成提供 Serverless Postgres，适合保存首页内容、FAQ、案例和后台配置。"
+          />
+          <ReferenceCard
+            title="schema.org"
+            href="https://schema.org/"
+            description="用于 Person、WebSite、ProfessionalService 和 FAQPage 结构化数据，帮助搜索引擎与 AI 工具理解页面。"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ReferenceCard({ title, href, description }: { title: string; href: string; description: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-teal-200 hover:shadow-glow"
+    >
+      <div className="flex items-center justify-between gap-4">
+        <h3 className="text-lg font-semibold text-slate-950">{title}</h3>
+        <ExternalLink className="h-4 w-4 text-slate-400" />
+      </div>
+      <p className="mt-3 text-sm leading-7 text-slate-600">{description}</p>
+    </a>
+  );
+}
+
 function Audience({ content }: { content: SiteContent }) {
   return (
     <section className="bg-white py-20 sm:py-24">
@@ -272,8 +423,8 @@ function Projects({ content }: { content: SiteContent }) {
       <div className="section-shell">
         <SectionHeading
           eyebrow="作品案例"
-          title="先用半真实案例建立信任，后续可以在后台持续替换成真实项目"
-          description="每个案例都围绕小企业能理解的结果表达，而不是堆技术名词。"
+          title="先展示演示案例方向，后续在后台替换成真实项目"
+          description="这些内容用于说明可以交付的项目类型，不假装已经是正式商业案例。后续有真实项目后，可以在后台持续替换。"
         />
         <div className="mt-12 grid gap-5 lg:grid-cols-3">
           {content.projects.map((project) => (
@@ -355,7 +506,45 @@ function Skills({ content }: { content: SiteContent }) {
   );
 }
 
+function Trust({ content, updatedAt }: { content: SiteContent; updatedAt: string }) {
+  return (
+    <section className="bg-white py-20 sm:py-24">
+      <div className="section-shell">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <SectionHeading
+              eyebrow="可信度说明"
+              title="我用可验证的交付方式建立信任，而不是只展示技术名词"
+              description="本项目采用公开可部署的 Next.js 技术栈、Vercel 部署流程、Neon 数据库预留和可编辑后台。首页内容会持续根据真实案例、客户反馈和 geocheck 检测结果更新。"
+              align="left"
+            />
+            <div className="mt-6 flex items-center gap-2 text-sm text-slate-500">
+              <CalendarDays className="h-4 w-4 text-teal-700" />
+              最近更新：{updatedAt}
+            </div>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              ["交付边界清晰", "首版优先完成首页、后台、数据库预留、AI 客服演示和基础 SEO，避免一开始做得过重。"],
+              ["过程适合小白", "你只需要审核页面效果、复制命令、部署和反馈问题，不需要手动改复杂代码。"],
+              ["内容可持续维护", "管理员可以在后台修改简介、服务、案例、联系方式、FAQ 和 SEO 描述。"],
+              ["面向真实转化", "页面围绕咨询入口、服务对象、案例结果和常见问题组织，方便潜在客户快速判断是否合作。"]
+            ].map(([title, description]) => (
+              <article key={title} className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+                <h3 className="text-lg font-semibold text-slate-950">{title}</h3>
+                <p className="mt-3 text-sm leading-7 text-slate-600">{description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FaqContact({ content }: { content: SiteContent }) {
+  const hasRealEmail = content.contact.email.includes("@");
+
   return (
     <section id="faq" className="py-20 sm:py-24">
       <div className="section-shell">
@@ -392,18 +581,44 @@ function FaqContact({ content }: { content: SiteContent }) {
                 <ContactLine icon={<MousePointer2 className="h-5 w-5" />} label="微信" value={content.contact.wechat} />
                 <ContactLine icon={<Globe2 className="h-5 w-5" />} label="方向" value="AI 客服 / 网站 / 智能体 / 自动化" />
               </div>
-              <a
-                href={`mailto:${content.contact.email}`}
-                className="focus-ring mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-950 px-6 py-4 font-semibold text-white transition hover:bg-teal-700"
-              >
-                发邮件咨询
-                <Rocket className="h-4 w-4" />
-              </a>
+              {hasRealEmail ? (
+                <a
+                  href={`mailto:${content.contact.email}`}
+                  className="focus-ring mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-950 px-6 py-4 font-semibold text-white transition hover:bg-teal-700"
+                >
+                  发邮件咨询
+                  <Rocket className="h-4 w-4" />
+                </a>
+              ) : (
+                <div className="mt-8 rounded-2xl bg-slate-50 p-4 text-sm leading-6 text-slate-600">
+                  请先在后台填写真实邮箱或微信，再启用正式联系入口。
+                </div>
+              )}
             </div>
           </aside>
         </div>
       </div>
     </section>
+  );
+}
+
+function Footer({ content, updatedAt }: { content: SiteContent; updatedAt: string }) {
+  return (
+    <footer className="border-t border-slate-200 bg-white py-10">
+      <div className="section-shell flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p className="font-semibold text-slate-950">{content.name}</p>
+          <p className="mt-2 text-sm text-slate-500">AI应用开发者｜最近更新：{updatedAt}</p>
+        </div>
+        <nav className="flex flex-wrap gap-4 text-sm text-slate-600" aria-label="信任页面">
+          <a className="hover:text-teal-700" href="/about">关于</a>
+          <a className="hover:text-teal-700" href="/contact">联系</a>
+          <a className="hover:text-teal-700" href="/privacy">隐私</a>
+          <a className="hover:text-teal-700" href="/terms">条款</a>
+          <a className="hover:text-teal-700" href="/llms.txt">llms.txt</a>
+        </nav>
+      </div>
+    </footer>
   );
 }
 

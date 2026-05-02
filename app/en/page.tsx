@@ -1,5 +1,6 @@
 import { SiteHome } from "@/components/site-home";
 import { defaultContent } from "@/lib/default-content";
+import { getAbsoluteUrl } from "@/lib/site-url";
 import type { SiteContent } from "@/lib/types";
 
 const englishPlaceholder: SiteContent = {
@@ -19,7 +20,10 @@ const englishPlaceholder: SiteContent = {
 
 export const metadata = {
   title: englishPlaceholder.seo.title,
-  description: englishPlaceholder.seo.description
+  description: englishPlaceholder.seo.description,
+  alternates: {
+    canonical: getAbsoluteUrl("/en")
+  }
 };
 
 export default function EnglishPage() {

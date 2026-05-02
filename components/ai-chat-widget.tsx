@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import type { FormEvent } from "react";
 import { Bot, MessageCircle, Minimize2, Send, Sparkles, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -13,51 +13,62 @@ type ChatMessage = {
 const starterMessages: ChatMessage[] = [
   {
     role: "assistant",
-    text: "你好，我是 AI 客服演示助手。你可以问我：小企业怎么接 AI 客服？网站原型多久能上线？自动化工具能解决什么问题？"
+    text: "你好，我是这个个人官网的 AI 客服助手。你可以问我：小企业怎么做 AI 客服？落地页怎么搭？智能体和自动化工具适合解决什么问题？"
   }
 ];
 
 const quickReplies = ["我想做 AI 客服", "我需要一个官网", "自动化工具怎么做"];
+const fallbackReply =
+  "收到。首版建议先做一个清晰的服务页和咨询入口，再把常见问题整理成知识库。这样访客进来后，能马上知道你能做什么、怎么合作、下一步联系谁。";
 
 export function AiChatWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>(starterMessages);
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const difyEmbedUrl =
-    process.env.NEXT_PUBLIC_DIFY_EMBED_URL ||
-    (process.env.NEXT_PUBLIC_DIFY_CHATBOT_TOKEN
-      ? `https://udify.app/chatbot/${process.env.NEXT_PUBLIC_DIFY_CHATBOT_TOKEN}`
-      : "");
-
-  const provider = useMemo(() => {
-    if (difyEmbedUrl) {
-      return "dify";
-    }
-
-    return "mock";
-  }, [difyEmbedUrl]);
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const trimmed = input.trim();
-    if (!trimmed) return;
+    if (!trimmed || loading) return;
 
-    addMockReply(trimmed);
+    await sendMessage(trimmed);
     setInput("");
   }
 
-  function addMockReply(text: string) {
-    setMessages((current) => [
-      ...current,
-      { role: "user", text },
-      {
-        role: "assistant",
-        text:
-          "收到。首版建议先做一个清晰的服务页和咨询入口，再把常见问题整理成知识库。这样小企业客户进来后，能马上知道你能做什么、怎么合作、下一步联系谁。"
-      }
-    ]);
+  async function sendMessage(text: string) {
     setOpen(true);
+    const nextMessages: ChatMessage[] = [...messages, { role: "user", text }];
+    setMessages(nextMessages);
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: text,
+          messages: messages.slice(-10)
+        })
+      });
+
+      const data = await response.json().catch(() => null);
+      const reply = typeof data?.reply === "string" && data.reply.trim() ? data.reply.trim() : fallbackReply;
+
+      setMessages((current) => [...current, { role: "assistant", text: reply }]);
+    } catch {
+      setMessages((current) => [
+        ...current,
+        {
+          role: "assistant",
+          text: "AI 客服暂时连接不稳定，请稍后再试。你也可以先通过页面联系方式联系我。"
+        }
+      ]);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -70,9 +81,9 @@ export function AiChatWidget() {
                 <Bot className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm font-semibold">AI 客服演示</p>
+                <p className="text-sm font-semibold">AI 客服助手</p>
                 <p className="text-xs text-white/80">
-                  {provider === "mock" ? "模拟模式，可随时替换 Dify / Coze" : `已检测到 ${provider} 配置`}
+                  DeepSeek 未配置时自动降级为演示回复
                 </p>
               </div>
             </div>
@@ -99,66 +110,68 @@ export function AiChatWidget() {
             </div>
           </div>
 
-          {provider === "dify" && difyEmbedUrl ? (
-            <iframe
-              title="Dify AI 客服"
-              src={difyEmbedUrl}
-              className="h-[520px] w-full border-0"
-              loading="lazy"
-            />
-          ) : (
-            <div className="flex h-[520px] flex-col">
-              <div className="flex-1 space-y-3 overflow-y-auto bg-slate-50/80 p-4">
-                {messages.map((message, index) => (
+          <div className="flex h-[520px] flex-col">
+            <div className="flex-1 space-y-3 overflow-y-auto bg-slate-50/80 p-4">
+              {messages.map((message, index) => (
+                <div
+                  key={`${message.role}-${index}`}
+                  className={cn("flex", message.role === "user" ? "justify-end" : "justify-start")}
+                >
                   <div
-                    key={`${message.role}-${index}`}
-                    className={cn("flex", message.role === "user" ? "justify-end" : "justify-start")}
+                    className={cn(
+                      "max-w-[82%] rounded-2xl px-4 py-3 text-sm leading-6",
+                      message.role === "user"
+                        ? "bg-teal-600 text-white"
+                        : "border border-slate-200 bg-white text-slate-700"
+                    )}
                   >
-                    <div
-                      className={cn(
-                        "max-w-[82%] rounded-2xl px-4 py-3 text-sm leading-6",
-                        message.role === "user"
-                          ? "bg-teal-600 text-white"
-                          : "border border-slate-200 bg-white text-slate-700"
-                      )}
-                    >
-                      {message.text}
-                    </div>
+                    {message.text}
                   </div>
+                </div>
+              ))}
+              {loading ? (
+                <div className="flex justify-start">
+                  <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500">
+                    正在思考...
+                  </div>
+                </div>
+              ) : null}
+            </div>
+
+            <div className="border-t border-slate-200 bg-white p-3">
+              <div className="mb-3 flex flex-wrap gap-2">
+                {quickReplies.map((reply) => (
+                  <button
+                    key={reply}
+                    type="button"
+                    className="focus-ring rounded-full border border-slate-200 px-3 py-1.5 text-xs text-slate-600 transition hover:border-teal-300 hover:bg-teal-50 hover:text-teal-700"
+                    onClick={() => sendMessage(reply)}
+                    disabled={loading}
+                  >
+                    {reply}
+                  </button>
                 ))}
               </div>
-
-              <div className="border-t border-slate-200 bg-white p-3">
-                <div className="mb-3 flex flex-wrap gap-2">
-                  {quickReplies.map((reply) => (
-                    <button
-                      key={reply}
-                      type="button"
-                      className="focus-ring rounded-full border border-slate-200 px-3 py-1.5 text-xs text-slate-600 transition hover:border-teal-300 hover:bg-teal-50 hover:text-teal-700"
-                      onClick={() => addMockReply(reply)}
-                    >
-                      {reply}
-                    </button>
-                  ))}
-                </div>
-                <form onSubmit={handleSubmit} className="flex gap-2">
-                  <input
-                    value={input}
-                    onChange={(event) => setInput(event.target.value)}
-                    placeholder="问问 AI 客服能帮你做什么"
-                    className="focus-ring min-w-0 flex-1 rounded-full border border-slate-200 px-4 py-2 text-sm"
-                  />
-                  <button
-                    type="submit"
-                    className="focus-ring flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-600 text-white transition hover:bg-teal-700"
-                    aria-label="发送消息"
-                  >
-                    <Send className="h-4 w-4" />
-                  </button>
-                </form>
-              </div>
+              <form onSubmit={handleSubmit} className="flex gap-2">
+                <input
+                  value={input}
+                  onChange={(event) => setInput(event.target.value)}
+                  placeholder="问问 AI 客服能帮你做什么"
+                  className="focus-ring min-w-0 flex-1 rounded-full border border-slate-200 px-4 py-2 text-sm"
+                  maxLength={1000}
+                  disabled={loading}
+                />
+                <button
+                  type="submit"
+                  className="focus-ring flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-600 text-white transition hover:bg-teal-700 disabled:cursor-not-allowed disabled:bg-slate-300"
+                  aria-label="发送消息"
+                  disabled={loading}
+                >
+                  <Send className="h-4 w-4" />
+                </button>
+              </form>
             </div>
-          )}
+          </div>
         </div>
       ) : null}
 

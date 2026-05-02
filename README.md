@@ -15,6 +15,7 @@
 - Geist 字体
 - Vercel Functions / API Routes
 - Neon Postgres via Vercel Marketplace
+- DeepSeek API 真实 AI 客服
 - Dify / Coze AI 客服配置预留
 - robots.txt、sitemap.xml、Open Graph、JSON-LD 结构化数据
 
@@ -52,6 +53,9 @@ ADMIN_PASSWORD=请换成你自己的强密码
 ADMIN_SESSION_SECRET=请换成一串很长的随机字符
 DATABASE_URL=
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
+DEEPSEEK_API_KEY=
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-chat
 NEXT_PUBLIC_DIFY_EMBED_URL=
 NEXT_PUBLIC_DIFY_CHATBOT_TOKEN=
 NEXT_PUBLIC_COZE_WEB_SDK_URL=
@@ -144,6 +148,9 @@ ADMIN_PASSWORD=你的强密码
 ADMIN_SESSION_SECRET=一串很长的随机字符
 DATABASE_URL=Neon 自动提供或手动粘贴
 NEXT_PUBLIC_SITE_URL=https://你的域名.vercel.app
+DEEPSEEK_API_KEY=你的 DeepSeek API Key
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-chat
 ```
 
 6. 点击 Deploy。
@@ -159,17 +166,88 @@ vercel --prod
 
 如果你是小白，推荐方式一，出错时把 Vercel 的错误截图发给我。
 
-## AI 客服演示窗口
+## DeepSeek AI 客服窗口
 
-首页右下角已经有一个类似 Chatbase 的悬浮聊天窗口。
+首页右下角有一个类似 Chatbase 的悬浮聊天窗口。当前实现方式是：
+
+1. 前端组件只请求本站接口 `/api/chat`。
+2. `/api/chat` 在服务端读取 `DEEPSEEK_API_KEY`。
+3. 服务端再调用 DeepSeek API。
+4. DeepSeek API Key 不会暴露给浏览器。
+5. 如果没有配置 `DEEPSEEK_API_KEY`，接口会自动返回模拟客服回复，网站不会报错。
 
 默认情况：
 
-- 没有配置 Dify 或 Coze 时，自动使用模拟聊天。
+- 没有配置 `DEEPSEEK_API_KEY` 时，自动使用模拟聊天。
 - 模拟聊天会围绕小企业 AI 客服、网站、智能体、自动化工具回答。
 - 这样即使没有 API Key，页面也不会空白或报错。
 
+### 如何获取 DeepSeek API Key
+
+1. 打开 DeepSeek 开放平台：https://platform.deepseek.com/
+2. 注册或登录账号。
+3. 进入 API Keys 页面。
+4. 创建新的 API Key。
+5. 复制 API Key，保存好，不要发给别人，不要写进前端代码。
+
+### 本地 `.env.local` 怎么填
+
+打开 `.env.local`，加入：
+
+```env
+DEEPSEEK_API_KEY=你的 DeepSeek API Key
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-chat
+```
+
+然后重启本地项目：
+
+```bash
+npm run dev
+```
+
+### Vercel 环境变量怎么填
+
+1. 打开 Vercel 项目。
+2. 进入 `Settings`。
+3. 进入 `Environment Variables`。
+4. 添加：
+
+```env
+DEEPSEEK_API_KEY=你的 DeepSeek API Key
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-chat
+```
+
+5. 保存后进入 `Deployments`。
+6. 点击最新部署右侧的三个点。
+7. 选择 `Redeploy`。
+
+注意：`DEEPSEEK_API_KEY` 不能写成 `NEXT_PUBLIC_DEEPSEEK_API_KEY`，否则会暴露到浏览器。
+
+说明：当前默认模型按本项目要求使用 `deepseek-chat`。如果 DeepSeek 后续推荐新模型，只需要在 Vercel 环境变量里把 `DEEPSEEK_MODEL` 改成新的模型名，然后重新部署即可。
+
+### 如何验证 AI 客服是否接入成功
+
+部署完成后打开网站右下角 AI 客服，输入：
+
+```text
+我想给小企业做一个 AI 客服，应该怎么开始？
+```
+
+如果配置成功，回复会更自然，并能围绕你的行业、需求、资料和期望效果继续追问。
+
+如果没有配置 Key，仍然会返回模拟回复。你也可以打开浏览器开发者工具的 Network 面板，确认前端请求的是：
+
+```text
+/api/chat
+```
+
+而不是直接请求 DeepSeek，这说明 API Key 没有暴露在前端。
+
 ## 如何接入 Dify
+
+当前版本 AI 客服优先使用 `/api/chat` 服务端接口接 DeepSeek。Dify 变量仍然保留，适合后续切换为 Dify 嵌入窗口或知识库客服。
 
 首版优先推荐 Dify，因为它的网页嵌入路径清晰，适合知识库客服演示。
 
@@ -233,6 +311,26 @@ NEXT_PUBLIC_COZE_PUBLIC_TOKEN=
 - 默认内容兜底
 - 可访问性基础按钮标签
 - 后续中英双语路由 `/en`
+
+## 本轮 geocheck 修复记录
+
+针对首次检测中出现的 `/llms.txt` 缺失、正文深度不足、GEO 可引用性低、E-E-A-T 信号不足、canonical 指向 localhost、信任页面缺失等问题，项目已补充：
+
+- `public/llms.txt`：提供 AI 友好的站点说明、关键页面链接、可引用摘要和更新时间。
+- 首页“可引用摘要”模块：补充 5 个具体数字、3 个权威引用入口和更适合 AI 摘录的首段说明。
+- 首页“可信度说明”模块：补充交付边界、维护方式、小白友好流程、更新时间等 E-E-A-T 信号。
+- 结构化数据：从单一 `Person` 扩展为 `Person`、`WebSite`、`ProfessionalService`、`FAQPage`。
+- 信任页面：新增 `/about`、`/contact`、`/privacy`、`/terms`，并从首页 footer 直接可达。
+- 元数据修复：canonical、robots、sitemap 改为优先读取 `NEXT_PUBLIC_SITE_URL`，其次读取 Vercel 自动提供的 `VERCEL_URL`，避免线上指向 `localhost`。
+- sitemap 扩展：加入首页、英文预留页、关于、联系、隐私、条款和 `llms.txt`。
+
+重新部署后，请再次提交 geocheck 检测。若仍提示 canonical 异常，请在 Vercel 环境变量中添加：
+
+```env
+NEXT_PUBLIC_SITE_URL=https://你的-vercel-网址.vercel.app
+```
+
+保存环境变量后，必须在 Vercel 的 `Deployments` 中点击 `Redeploy`，新配置才会生效。
 
 ## 常见错误处理
 
