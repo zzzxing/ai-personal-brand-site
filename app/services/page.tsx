@@ -45,10 +45,10 @@ export default function ServicesPage() {
               <Info label="适合谁" value={service.fit} />
               <Info label="最小版本包含什么" value={service.minimum} />
               <Info label="后续可以怎么升级" value={service.upgrade} />
-              {"tech" in service ? <Info label="可选技术" value={service.tech} /> : null}
-              {"admin" in service ? <Info label="是否需要后台管理" value={service.admin} /> : null}
-              {"preparation" in service ? <Info label="资料准备建议" value={service.preparation} /> : null}
-              {"io" in service ? <Info label="常见输入输出" value={service.io} /> : null}
+              {service.tech ? <Info label="可选技术" value={service.tech} /> : null}
+              {service.admin ? <Info label="是否需要后台管理" value={service.admin} /> : null}
+              {service.preparation ? <Info label="资料准备建议" value={service.preparation} /> : null}
+              {service.io ? <Info label="常见输入输出" value={service.io} /> : null}
             </article>
           ))}
         </section>

@@ -1,5 +1,31 @@
 export const siteBaseUrl = "https://ai-personal-brand-site.vercel.app";
 
+export type ServiceDetail = {
+  title: string;
+  summary: string;
+  fit: string;
+  minimum: string;
+  upgrade: string;
+  tech?: string;
+  admin?: string;
+  preparation?: string;
+  io?: string;
+};
+
+export type UseCaseDetail = {
+  title: string;
+  problem: string;
+  start: string;
+  minimum: string;
+  upgrade: string;
+  page: string;
+};
+
+export type StarterSection = {
+  title: string;
+  items: string[];
+};
+
 export const extendedFaqs = [
   {
     question: "智页 AI Lab 是什么？",
@@ -73,7 +99,7 @@ export const extendedFaqs = [
   }
 ];
 
-export const serviceDetails = [
+export const serviceDetails: ServiceDetail[] = [
   {
     title: "AI 客服演示站",
     summary: "适合小企业、课程项目、活动报名、产品说明页。最小版本包含介绍页、FAQ、右下角聊天窗口和联系入口。",
@@ -108,7 +134,7 @@ export const serviceDetails = [
   }
 ];
 
-export const useCases = [
+export const useCases: UseCaseDetail[] = [
   {
     title: "小企业想试 AI 客服",
     problem: "客户经常重复咨询服务内容、预约方式、价格范围、产品说明和售后问题。",
@@ -151,7 +177,7 @@ export const useCases = [
   }
 ];
 
-export const starterSections = [
+export const starterSections: StarterSection[] = [
   {
     title: "先回答 5 个问题",
     items: ["这个页面给谁看？", "对方打开页面后要知道什么？", "对方需要完成什么操作？", "是否需要 AI 客服或问答？", "是否需要后续自己修改内容？"]
