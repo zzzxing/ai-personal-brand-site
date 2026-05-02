@@ -184,6 +184,39 @@ export function AdminDashboard() {
             />
           </Panel>
 
+          <Panel title="关于我">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field
+                label="区块小标题"
+                value={content.about.eyebrow}
+                onChange={(value) => setContent({ ...content, about: { ...content.about, eyebrow: value } })}
+              />
+              <Field
+                label="区块主标题"
+                value={content.about.title}
+                onChange={(value) => setContent({ ...content, about: { ...content.about, title: value } })}
+              />
+            </div>
+            <TextArea
+              label="区块说明"
+              value={content.about.description}
+              onChange={(value) => setContent({ ...content, about: { ...content.about, description: value } })}
+            />
+            <TextArea
+              label="正文段落，每段之间空一行"
+              value={content.about.paragraphs.join("\n\n")}
+              onChange={(value) =>
+                setContent({
+                  ...content,
+                  about: {
+                    ...content.about,
+                    paragraphs: splitParagraphs(value)
+                  }
+                })
+              }
+            />
+          </Panel>
+
           <Panel title="服务模块">
             <EditableServices
               items={content.services}
@@ -379,6 +412,13 @@ function updateArray<T>(items: T[], index: number, next: T, onChange: (items: T[
 function splitText(value: string) {
   return value
     .split(/[，,]/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function splitParagraphs(value: string) {
+  return value
+    .split(/\n\s*\n/)
     .map((item) => item.trim())
     .filter(Boolean);
 }

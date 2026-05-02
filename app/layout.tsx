@@ -10,25 +10,25 @@ const siteUrl = getSiteUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "曾鑫｜AI应用开发者与智能系统实践者",
+    default: "Zing AI Lab｜AI客服、智能体原型与小企业AI应用落地",
     template: "%s"
   },
   description:
-    "曾鑫的个人品牌官网，展示自然语言处理、多模态情感分析、大语言模型应用、AI客服、智能体原型、个人品牌网站、小企业落地页与自动化工具开发实践。",
+    "Zing AI Lab 是面向个人、小企业、教育项目和早期团队的 AI 应用落地样板间，展示 AI 客服、DeepSeek 接入、Dify/Coze 智能体、个人品牌官网、后台管理、云数据库与 Vercel 部署实践。",
   openGraph: {
-    title: "曾鑫｜AI应用开发者与智能系统实践者",
+    title: "Zing AI Lab｜AI客服、智能体原型与小企业AI应用落地",
     description:
-      "曾鑫的个人品牌官网，展示自然语言处理、多模态情感分析、大语言模型应用、AI客服、智能体原型、个人品牌网站、小企业落地页与自动化工具开发实践。",
+      "Zing AI Lab 是面向个人、小企业、教育项目和早期团队的 AI 应用落地样板间，展示 AI 客服、DeepSeek 接入、Dify/Coze 智能体、个人品牌官网、后台管理、云数据库与 Vercel 部署实践。",
     type: "website",
     locale: "zh_CN",
     url: siteUrl,
-    siteName: "曾鑫个人品牌官网",
+    siteName: "Zing AI Lab",
     images: [
       {
         url: "/ai-brand-hero.png",
         width: 960,
         height: 720,
-        alt: "曾鑫 AI 应用开发者与智能系统实践者个人官网封面图"
+        alt: "Zing AI Lab AI 应用落地样板间封面图"
       }
     ]
   }

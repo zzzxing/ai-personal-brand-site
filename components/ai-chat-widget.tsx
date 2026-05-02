@@ -13,13 +13,13 @@ type ChatMessage = {
 const starterMessages: ChatMessage[] = [
   {
     role: "assistant",
-    text: "你好，我是这个个人官网的 AI 客服助手。你可以问我：小企业怎么做 AI 客服？落地页怎么搭？智能体和自动化工具适合解决什么问题？"
+    text: "你好，我是 Zing AI Lab 的 AI 助手。你可以问我：小企业如何接入 AI 客服、DeepSeek/Dify/Coze 怎么选、个人品牌官网怎么做，或者如何把一个 AI 想法做成可上线原型。"
   }
 ];
 
-const quickReplies = ["我想做 AI 客服", "我需要一个官网", "自动化工具怎么做"];
+const quickReplies = ["小企业接 AI 客服", "DeepSeek/Dify/Coze 怎么选", "AI 想法怎么上线"];
 const fallbackReply =
-  "收到。首版建议先做一个清晰的服务页和咨询入口，再把常见问题整理成知识库。这样访客进来后，能马上知道你能做什么、怎么合作、下一步联系谁。";
+  "收到。Zing AI Lab 建议先做“官网 + FAQ + AI 客服 + 联系入口”的最小版本，等访客真的开始提问后，再根据高频问题补知识库、优化提示词和升级工作流。";
 
 export function AiChatWidget() {
   const [open, setOpen] = useState(false);
@@ -81,9 +81,9 @@ export function AiChatWidget() {
                 <Bot className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm font-semibold">AI 客服助手</p>
+                <p className="text-sm font-semibold">Zing AI Lab 助手</p>
                 <p className="text-xs text-white/80">
-                  DeepSeek 未配置时自动降级为演示回复
+                  DeepSeek 未配置时自动降级为模拟问答
                 </p>
               </div>
             </div>
@@ -156,7 +156,7 @@ export function AiChatWidget() {
                 <input
                   value={input}
                   onChange={(event) => setInput(event.target.value)}
-                  placeholder="问问 AI 客服能帮你做什么"
+                  placeholder="问 Zing AI Lab 能怎么落地 AI 应用"
                   className="focus-ring min-w-0 flex-1 rounded-full border border-slate-200 px-4 py-2 text-sm"
                   maxLength={1000}
                   disabled={loading}
@@ -179,13 +179,13 @@ export function AiChatWidget() {
         type="button"
         onClick={() => setOpen((value) => !value)}
         className="focus-ring group flex items-center gap-3 rounded-full bg-slate-950 px-5 py-4 text-white shadow-glow transition hover:-translate-y-0.5 hover:bg-teal-700"
-        aria-label="打开 AI 客服演示窗口"
+        aria-label="打开 Zing AI Lab AI 客服演示窗口"
       >
         <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-white/12">
           <MessageCircle className="h-5 w-5" />
           <Sparkles className="absolute -right-1 -top-1 h-4 w-4 text-amber-300" />
         </span>
-        <span className="text-sm font-semibold">问问 AI 客服</span>
+        <span className="text-sm font-semibold">问 Zing AI Lab</span>
       </button>
     </div>
   );

@@ -73,6 +73,13 @@ function normalizeContent(content: Partial<SiteContent>): SiteContent {
       ...defaultContent.contact,
       ...content.contact
     },
+    about: {
+      ...defaultContent.about,
+      ...content.about,
+      paragraphs: content.about?.paragraphs?.length
+        ? content.about.paragraphs
+        : defaultContent.about.paragraphs
+    },
     seo: {
       ...defaultContent.seo,
       ...content.seo,

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { getAbsoluteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = {
-  title: "服务条款｜AI应用开发者个人品牌官网",
-  description: "说明本站展示内容、项目沟通、AI 客服演示和第三方服务使用的基本边界。",
+  title: "服务条款｜Zing AI Lab",
+  description: "说明 Zing AI Lab 展示内容、项目沟通、AI 客服演示和第三方服务使用的基本边界。",
   alternates: {
     canonical: getAbsoluteUrl("/terms")
   }
@@ -20,8 +20,8 @@ export default function TermsPage() {
           <p className="mt-4 text-sm text-slate-500">最近更新：2026-05-02</p>
           <div className="prose-trust mt-8">
             <p>
-              本站内容用于介绍 AI 应用开发、个人品牌官网、AI 客服、智能体工作流和自动化工具原型服务。页面中的案例
-              可以包含演示型或占位型内容，正式合作时会根据真实需求、预算、时间和第三方服务限制确认交付范围。
+              本站内容用于介绍 Zing AI Lab 的 AI 应用落地样板、个人品牌官网、AI 客服、智能体工作流和自动化工具原型服务。
+              页面中的案例统一作为演示案例或可改造方向，正式合作时会根据真实需求、预算、时间和第三方服务限制确认交付范围。
             </p>
             <h2>项目沟通</h2>
             <p>

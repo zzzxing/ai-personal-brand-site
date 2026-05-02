@@ -42,6 +42,13 @@ export interface SeoInfo {
   keywords: string[];
 }
 
+export interface AboutInfo {
+  eyebrow: string;
+  title: string;
+  description: string;
+  paragraphs: string[];
+}
+
 export interface SiteContent {
   locale: Locale;
   contentVersion?: string;
@@ -50,6 +57,7 @@ export interface SiteContent {
   heroTitle: string;
   heroSubtitle: string;
   intro: string;
+  about: AboutInfo;
   heroHighlights: string[];
   services: ServiceItem[];
   audiences: AudienceItem[];

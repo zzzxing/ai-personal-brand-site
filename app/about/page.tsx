@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 import { getAbsoluteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = {
-  title: "关于｜AI应用开发者",
-  description: "了解本站作者的服务方向、交付原则、技术栈和适合合作的 AI 应用开发场景。",
+  title: "关于｜Zing AI Lab",
+  description: "了解 Zing AI Lab 的定位、能力依据、AI 应用落地样板间结构和适合合作的场景。",
   alternates: {
     canonical: getAbsoluteUrl("/about")
   }
@@ -12,25 +12,24 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <TrustPageShell title="关于我" eyebrow="About" updatedAt="2026-05-02">
+    <TrustPageShell title="关于 Zing AI Lab" eyebrow="About" updatedAt="2026-05-02">
       <p>
-        我是一个面向真实业务场景的 AI 应用开发者，主要帮助小企业、个人品牌、老师和轻量创业项目，把网站、
-        AI 客服、智能体流程和自动化工具做成可以上线、可以演示、可以继续迭代的版本。
+        Zing AI Lab 是面向个人、小企业、教育项目和早期团队的 AI 应用落地样板间，展示如何把 AI 客服、
+        知识库问答、品牌官网、后台管理、云数据库和 Vercel 部署组合成可访问、可演示、可迭代的在线应用。
       </p>
       <h2>服务定位</h2>
       <p>
-        本站的核心定位是“AI应用开发者｜用网页、智能体与自动化工具解决真实问题”。首版交付优先关注页面美观、
-        稳定部署和服务转化，再逐步扩展后台、数据库、AI 客服、博客、案例和数据看板。
+        本站公开品牌统一使用 Zing AI Lab，公开身份统一使用 Zing。它不是普通简历页，而是用于说明个人开发者
+        如何将 DeepSeek、Dify、Coze、NLP 分析与 Web 开发结合起来的 AI 应用样板。
       </p>
       <h2>技术与交付原则</h2>
       <p>
-        项目采用 Next.js、React、Tailwind CSS、Vercel、Neon Postgres、Dify/Coze 预留接口等技术方案。
-        这些选择的共同目标是降低部署失败风险，让非技术用户也能按步骤完成上线、内容修改和后续优化。
+        项目采用 Next.js、Tailwind CSS、Vercel、Neon Postgres、DeepSeek API、Dify/Coze 扩展思路和后台内容管理。
+        这些选择的共同目标是降低首版上线风险，让小项目先变成可访问、可反馈的版本。
       </p>
       <h2>适合合作的场景</h2>
       <p>
-        适合需要快速验证服务表达的小企业官网、AI 客服演示站、课程活动页、个人品牌页、自动化资料整理工具、
-        智能体工作流原型和小程序概念验证项目。
+        适合需要 AI 客服演示站、个人品牌官网、小企业落地页、课程/研学项目原型、NLP 文本分析工具和资料整理自动化的场景。
       </p>
     </TrustPageShell>
   );

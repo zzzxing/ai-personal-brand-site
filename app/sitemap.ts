@@ -11,7 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/contact", 0.8],
     ["/privacy", 0.45],
     ["/terms", 0.45],
-    ["/llms.txt", 0.7]
+    ["/llms.txt", 0.75],
+    ["/llms-full.txt", 0.75]
   ].map(([path, priority]) => ({
     url: getAbsoluteUrl(path as string),
     lastModified,

@@ -7,14 +7,14 @@ const englishPlaceholder: SiteContent = {
   ...defaultContent,
   locale: "en",
   name: defaultContent.name,
-  tagline: "AI Application Developer | Websites, agents, and automation for real problems",
-  heroTitle: "English content is reserved for the next iteration",
+  tagline: "Zing AI Lab | AI application showroom for individuals and small businesses",
+  heroTitle: "Zing AI Lab | AI customer service, agent prototypes, and small-business AI applications",
   heroSubtitle:
-    "The first release focuses on the Chinese version. The code structure already includes a bilingual route and can be expanded from the admin panel later.",
+    "The Chinese homepage is the primary version. This route is reserved for a future English version of the Zing AI Lab AI application showroom.",
   seo: {
-    title: "AI Application Developer | Portfolio Website",
-    description: "A bilingual-ready personal brand website for AI apps, websites, agents, and automation tools.",
-    keywords: ["AI developer", "AI customer service", "automation", "Next.js", "Vercel"]
+    title: "Zing AI Lab | AI Application Showroom",
+    description: "A bilingual-ready AI application showroom for AI customer service, agent prototypes, small-business landing pages, and automation tools.",
+    keywords: ["Zing AI Lab", "AI customer service", "DeepSeek", "Dify", "Coze", "Vercel"]
   }
 };
 
