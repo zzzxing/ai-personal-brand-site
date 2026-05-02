@@ -33,45 +33,12 @@ const showroomCards = [
   ["在线部署", "部署成一个公开网址，可以发给客户、老师、评委或合作方查看。"]
 ];
 
-const referenceCards = [
-  {
-    title: "想试 AI 客服的小企业",
-    description:
-      "如果你想知道小企业能不能低成本做 AI 客服，可以参考智页这种结构：先有一个介绍页，再整理 FAQ，最后接入右下角聊天窗口。这样不用一开始做复杂客服系统，也能先验证客户会不会真的提问。"
-  },
-  {
-    title: "想做项目展示页的个人或团队",
-    description:
-      "如果你有比赛项目、课程成果、个人服务或创业想法，可以参考智页的页面结构：首屏讲清楚定位，中间展示适合场景和可交付内容，最后用 FAQ 和联系入口承接咨询。"
-  },
-  {
-    title: "想了解 AI 工具怎么落地的人",
-    description:
-      "如果你还不确定该用 DeepSeek、Dify 还是 Coze，可以先看具体需求：只要聊天问答，可以先接 DeepSeek；资料多、要维护知识库，可以考虑 Dify；想快速做智能体演示，可以尝试 Coze。"
-  }
-];
-
 const decisionRows = [
   ["想快速试用 AI 客服", "官网 + FAQ + DeepSeek 聊天窗口", "上线快，成本低，适合先看访客会不会真的提问。"],
   ["已经有很多文档资料", "Dify 知识库问答", "适合管理 FAQ、文档、课程资料和业务说明，后续可以继续补充。"],
   ["想快速做智能体演示", "Coze 智能体原型", "可视化搭建快，适合早期展示流程和对话效果。"],
   ["需要展示个人或项目", "项目展示页 + 后台管理", "既能展示内容，也能后续持续修改。"],
   ["有评论、问卷或文本资料", "NLP 轻量分析工具", "适合做摘要、分类、关键词提取和情感倾向分析。"]
-];
-
-const providerCards = [
-  [
-    "DeepSeek API",
-    "适合先让网页具备真实聊天能力。用户在前端提问，网站后端调用模型，API Key 不会暴露给访客。"
-  ],
-  [
-    "Dify",
-    "适合管理知识库、文档资料和业务 FAQ。资料多、需要长期维护时，可以考虑 Dify。"
-  ],
-  [
-    "Coze",
-    "适合快速搭建一个可视化智能体，方便早期演示流程和调整对话逻辑。"
-  ]
 ];
 
 export function SiteHome({ content }: { content: SiteContent }) {
@@ -115,12 +82,10 @@ export function SiteHome({ content }: { content: SiteContent }) {
       <main className="overflow-hidden">
         <Hero content={content} />
         <Showroom />
-        <Needs content={content} />
         <Deliverables services={content.services} />
+        <Needs content={content} />
         <DecisionTable />
         <Process content={content} />
-        <ReferenceSection />
-        <ProviderChoice />
         <FaqContact content={content} />
       </main>
       <Footer content={content} />
@@ -142,12 +107,13 @@ function Hero({ content }: { content: SiteContent }) {
             </span>
             智页 AI Lab
           </a>
-          <div className="hidden items-center gap-6 text-sm font-medium text-slate-600 lg:flex">
+          <div className="hidden items-center gap-5 text-sm font-medium text-slate-600 lg:flex">
             {[
-              ["能做什么", "#services"],
-              ["样板间", "#showroom"],
-              ["方案选择", "#decision"],
-              ["FAQ", "#faq"],
+              ["首页", "/"],
+              ["服务", "/services"],
+              ["场景", "/use-cases"],
+              ["问答", "/answers"],
+              ["启动清单", "/starter"],
               ["联系", "#contact"]
             ].map(([item, href]) => (
               <a key={item} href={href} className="transition hover:text-teal-700">
@@ -157,11 +123,31 @@ function Hero({ content }: { content: SiteContent }) {
           </div>
           <a
             href="#chat"
-            className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-700"
+            className="hidden rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-700 sm:inline-flex"
             aria-label="体验智页 AI 客服"
           >
             体验 AI 客服
           </a>
+          <details className="relative lg:hidden">
+            <summary className="cursor-pointer list-none rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white">
+              菜单
+            </summary>
+            <div className="absolute right-0 z-20 mt-3 w-40 rounded-2xl border border-slate-200 bg-white p-3 text-sm font-medium text-slate-600 shadow-soft">
+              {[
+                ["首页", "/"],
+                ["服务", "/services"],
+                ["场景", "/use-cases"],
+                ["问答", "/answers"],
+                ["启动清单", "/starter"],
+                ["联系", "#contact"],
+                ["体验 AI 客服", "#chat"]
+              ].map(([item, href]) => (
+                <a key={item} className="block rounded-xl px-3 py-2 hover:bg-teal-50 hover:text-teal-700" href={href}>
+                  {item}
+                </a>
+              ))}
+            </div>
+          </details>
         </nav>
 
         <div className="grid items-center gap-9 pt-10 lg:grid-cols-[1.02fr_0.98fr] xl:gap-12 xl:pt-14">
@@ -360,45 +346,6 @@ function Process({ content }: { content: SiteContent }) {
             </article>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-function ReferenceSection() {
-  return (
-    <section className="bg-white/70 py-14 sm:py-16 lg:py-24">
-      <div className="section-shell">
-        <SectionHeading eyebrow="参考对象" title="这个网站适合被谁参考？" />
-        <div className="mt-10 grid gap-5 lg:grid-cols-3">
-          {referenceCards.map((item) => (
-            <article key={item.title} className="rounded-2xl border border-teal-100 bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-semibold leading-7 text-slate-950">{item.title}</h3>
-              <p className="mt-4 text-sm leading-7 text-slate-600">{item.description}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ProviderChoice() {
-  return (
-    <section className="py-14 sm:py-16 lg:py-24">
-      <div className="section-shell">
-        <SectionHeading eyebrow="AI 客服方案" title="DeepSeek、Dify、Coze 怎么选？" />
-        <div className="mt-10 grid gap-5 lg:grid-cols-3">
-          {providerCards.map(([title, desc]) => (
-            <article key={title} className="panel rounded-2xl p-6">
-              <h3 className="text-xl font-semibold text-slate-950">{title}</h3>
-              <p className="mt-4 text-sm leading-7 text-slate-600">{desc}</p>
-            </article>
-          ))}
-        </div>
-        <p className="mt-8 max-w-3xl rounded-2xl bg-teal-50 p-5 text-sm leading-7 text-teal-900">
-          智页的建议是：首版不要追求复杂系统，先做“介绍页 + FAQ + AI 客服 + 联系入口”的最小版本。等访客真的开始提问，再根据高频问题补知识库、优化提示词和升级工作流。
-        </p>
       </div>
     </section>
   );

@@ -6,11 +6,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ["/", 1],
+    ["/answers", 0.9],
+    ["/services", 0.9],
+    ["/use-cases", 0.85],
+    ["/starter", 0.85],
     ["/en", 0.55],
-    ["/about", 0.85],
-    ["/contact", 0.8],
-    ["/privacy", 0.45],
-    ["/terms", 0.45],
     ["/llms.txt", 0.75],
     ["/llms-full.txt", 0.75]
   ].map(([path, priority]) => ({
