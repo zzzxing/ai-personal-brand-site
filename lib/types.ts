@@ -44,6 +44,7 @@ export interface SeoInfo {
 
 export interface SiteContent {
   locale: Locale;
+  contentVersion?: string;
   name: string;
   tagline: string;
   heroTitle: string;

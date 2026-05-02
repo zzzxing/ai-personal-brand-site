@@ -56,6 +56,16 @@ export async function saveSiteContent(content: SiteContent) {
 }
 
 function normalizeContent(content: Partial<SiteContent>): SiteContent {
+  if (content.contentVersion !== defaultContent.contentVersion) {
+    return {
+      ...defaultContent,
+      contact: {
+        ...defaultContent.contact,
+        ...content.contact
+      }
+    };
+  }
+
   return {
     ...defaultContent,
     ...content,

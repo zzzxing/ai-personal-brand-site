@@ -25,12 +25,21 @@ export async function generateMetadata(): Promise<Metadata> {
       description: content.seo.description,
       url: siteUrl,
       type: "website",
-      locale: "zh_CN"
+      locale: "zh_CN",
+      images: [
+        {
+          url: "/ai-brand-hero.png",
+          width: 960,
+          height: 720,
+          alt: "AI应用开发者个人官网封面图"
+        }
+      ]
     },
     twitter: {
       card: "summary_large_image",
       title: content.seo.title,
-      description: content.seo.description
+      description: content.seo.description,
+      images: ["/ai-brand-hero.png"]
     }
   };
 }
