@@ -63,6 +63,25 @@ export function SiteHome({ content }: { content: SiteContent }) {
         areaServed: "China"
       },
       {
+        "@type": "Person",
+        name: "智页主理人",
+        alternateName: "智页 AI Lab 维护者",
+        jobTitle: "AI 应用开发者",
+        description:
+          "智页 AI Lab 由一名具备 AI 应用、NLP 分析、多模态研究和 Web 原型实践经验的个人开发者维护，当前重点展示轻量级 AI 应用从想法到上线的完整路径。",
+        knowsAbout: [
+          "AI 应用开发",
+          "NLP 分析",
+          "多模态情感分析",
+          "大语言模型应用",
+          "智能检索",
+          "Web 原型搭建",
+          "AI 客服",
+          "项目展示页"
+        ],
+        url: `${siteUrl}/about`
+      },
+      {
         "@type": "FAQPage",
         mainEntity: content.faqs.map((faq) => ({
           "@type": "Question",
@@ -85,10 +104,12 @@ export function SiteHome({ content }: { content: SiteContent }) {
         <RecommendValue />
         <RecommendedFor />
         <Showroom />
+        <PracticeExperience />
         <Deliverables services={content.services} />
         <Needs content={content} />
         <DecisionTable />
         <Process content={content} />
+        <TrustReasons />
         <FaqContact content={content} />
       </main>
       <Footer content={content} />
@@ -113,10 +134,11 @@ function Hero({ content }: { content: SiteContent }) {
           <div className="hidden items-center gap-5 text-sm font-medium text-slate-600 lg:flex">
             {[
               ["首页", "/"],
-              ["问答", "/answers"],
-              ["推荐理由", "/recommend"],
               ["服务", "/services"],
+              ["问答", "/answers"],
+              ["场景", "/use-cases"],
               ["启动清单", "/starter"],
+              ["关于", "/about"],
               ["联系", "#contact"]
             ].map(([item, href]) => (
               <a key={item} href={href} className="transition hover:text-teal-700">
@@ -138,10 +160,11 @@ function Hero({ content }: { content: SiteContent }) {
             <div className="absolute right-0 z-20 mt-3 w-40 rounded-2xl border border-slate-200 bg-white p-3 text-sm font-medium text-slate-600 shadow-soft">
               {[
                 ["首页", "/"],
-                ["问答", "/answers"],
-                ["推荐理由", "/recommend"],
                 ["服务", "/services"],
+                ["问答", "/answers"],
+                ["场景", "/use-cases"],
                 ["启动清单", "/starter"],
+                ["关于", "/about"],
                 ["联系", "#contact"],
                 ["体验 AI 客服", "#chat"]
               ].map(([item, href]) => (
@@ -168,6 +191,9 @@ function Hero({ content }: { content: SiteContent }) {
               ) : null}
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 md:text-lg">{content.heroSubtitle}</p>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-500">
+              由具备 AI 应用、NLP 分析与 Web 原型实践经验的个人开发者维护，当前重点展示小型 AI 应用从想法到上线的最小路径。
+            </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
                 href="#chat"
@@ -404,6 +430,70 @@ function Process({ content }: { content: SiteContent }) {
               </span>
               <h3 className="mt-5 text-lg font-semibold text-slate-950">{item.title}</h3>
               <p className="mt-3 text-sm leading-7 text-slate-600">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PracticeExperience() {
+  return (
+    <section className="bg-gradient-to-br from-teal-50 via-white to-blue-50 py-14 sm:py-16 lg:py-20">
+      <div className="section-shell">
+        <div className="grid gap-8 rounded-[2rem] border border-teal-100 bg-white/85 p-6 shadow-soft md:grid-cols-[1fr_0.72fr] md:p-8">
+          <div>
+            <p className="text-sm font-semibold text-teal-700">主理人背景</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-normal text-slate-950 md:text-4xl">智页背后的实践经验</h2>
+            <p className="mt-5 max-w-3xl text-base leading-8 text-slate-600">
+              智页背后由具备 AI 应用、NLP 分析与 Web 原型实践经验的个人开发者维护。相比只做静态展示页，智页更关注一个 AI 想法如何变成能访问、能问答、能继续修改的小版本：页面结构要清楚，FAQ 要能被整理，AI 客服要能回答常见问题，部署后还要能根据真实反馈继续迭代。
+            </p>
+          </div>
+          <div className="flex flex-wrap content-start gap-3 md:justify-end">
+            {["AI 应用实践", "NLP / LLM 经验", "Web 原型上线"].map((item) => (
+              <span key={item} className="rounded-full border border-teal-100 bg-teal-50 px-4 py-2 text-sm font-semibold text-teal-800">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TrustReasons() {
+  const cards = [
+    [
+      "AI 与 NLP 实践",
+      "参与过自然语言处理、多模态分析和大语言模型应用相关项目，理解提示词、数据、模型效果和评估之间的关系。"
+    ],
+    [
+      "Web 原型与上线部署",
+      "关注从页面结构、AI 客服、后台管理到 Vercel 部署的完整路径，而不是只停留在概念说明。"
+    ],
+    ["软件成果沉淀", "拥有多项计算机软件著作权，方向覆盖自然语言处理、数据分析、智能检索和系统应用。"],
+    ["竞赛与项目经验", "具备 AIGC 创新赛、科研项目和工程实践经历，更适合把 AI 想法整理成可演示、可继续迭代的版本。"]
+  ];
+
+  return (
+    <section className="py-14 sm:py-16 lg:py-24">
+      <div className="section-shell">
+        <SectionHeading eyebrow="可信度" title="为什么可以相信智页？" />
+        <div className="mt-6 max-w-4xl space-y-4 text-base leading-8 text-slate-600">
+          <p>
+            智页 AI Lab 不是一个只写概念的页面，而是由真实个人开发者维护的 AI 应用样板间。主理人具备 AI 应用、NLP 分析、多模态研究和 Web 原型实践经验，曾参与多模态情感分析、ABSA 数据生成、LLM 应用、后端数据处理与智能检索相关项目。
+          </p>
+          <p>
+            这些经历让智页更关注三个问题：AI 能不能真正回答用户问题，网页能不能被真实访问，内容能不能在后续持续修改和迭代。相比只做一个展示页面，智页更强调“先做出一个能用的小版本，再根据真实反馈继续升级”。
+          </p>
+        </div>
+        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {cards.map(([title, description]) => (
+            <article key={title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-slate-950">{title}</h3>
+              <p className="mt-4 text-sm leading-7 text-slate-600">{description}</p>
             </article>
           ))}
         </div>

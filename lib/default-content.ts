@@ -3,7 +3,7 @@ import { homeFaqs } from "@/lib/zhiye-pages";
 
 export const defaultContent: SiteContent = {
   locale: "zh",
-  contentVersion: "zhiye-ai-lab-strict-v1",
+  contentVersion: "zhiye-ai-lab-trust-v1",
   name: "智页 AI Lab",
   tagline: "智页｜先把 AI 想法做成一个能用的网址",
   heroTitle: "智页 AI Lab\n先把 AI 想法做成一个能用的网址",
@@ -17,7 +17,7 @@ export const defaultContent: SiteContent = {
     paragraphs: [
       "很多 AI 想法不需要一开始就做成完整系统。更现实的做法，是先做一个能访问的小网站：把服务、项目或资料讲清楚，放上 FAQ，接入一个右下角 AI 客服，再加上联系入口和后台管理。",
       "智页 AI Lab 这个网站本身就是这样的示例。它展示了一个轻量 AI 网页原型应该包含什么：清晰首页、常见问题、方案选择、AI 客服、后台内容管理和在线部署地址。",
-      "智页背后由具备 AI 应用、NLP 分析与 Web 原型实践经验的个人开发者维护，当前重点展示轻量级 AI 应用从想法到上线的完整路径。"
+      "智页 AI Lab 由一名 AI 应用开发者主理，长期关注大语言模型、NLP 分析、多模态情感理解、智能检索和 Web 原型搭建，当前重点展示轻量级 AI 应用从想法到上线的完整路径。"
     ]
   },
   heroHighlights: ["AI 客服", "项目展示页", "FAQ 问答", "后台管理", "在线部署"],

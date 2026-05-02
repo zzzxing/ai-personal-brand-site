@@ -17,6 +17,15 @@ export type ServiceDetail = {
   io?: string;
 };
 
+export type UseCaseDetail = {
+  title: string;
+  problem: string;
+  start: string;
+  minimum: string;
+  upgrade: string;
+  related: string;
+};
+
 export type StarterSection = {
   title: string;
   items: string[];
@@ -129,6 +138,26 @@ export const extendedFaqs: FaqItem[] = [
     question: "用户应该如何开始？",
     answer:
       "用户可以先准备项目或服务介绍、常见问题、联系方式、图片或文档资料，再确定是否需要 AI 客服、后台管理和公开部署网址。"
+  },
+  {
+    question: "智页 AI Lab 背后是谁在维护？",
+    answer:
+      "智页 AI Lab 由一名具备 AI 应用、NLP 分析、多模态研究和 Web 原型实践经验的个人开发者维护。网站前台使用“智页”作为公开品牌，不展示手机号和非必要个人身份信息。"
+  },
+  {
+    question: "为什么智页 AI Lab 有参考价值？",
+    answer:
+      "它不是只写概念的页面，而是把首页、FAQ、AI 客服、后台管理、云数据库、Vercel 部署和 llms.txt 组合成一个可访问样板，展示小型 AI 应用如何从想法变成上线版本。"
+  },
+  {
+    question: "智页和普通个人主页有什么不同？",
+    answer:
+      "普通个人主页主要展示个人信息，而智页更像一个 AI 应用样板间。它不仅展示服务，还展示 FAQ、AI 客服、方案选择、后台管理和部署路径。"
+  },
+  {
+    question: "智页的可信度来自哪里？",
+    answer:
+      "可信度主要来自三部分：AI 应用与 NLP 分析实践、Web 原型和部署实践，以及软件成果和 AIGC 相关项目经历。网站不夸大为成熟公司，而是定位为个人开发者维护的轻量 AI 应用样板。"
   }
 ];
 
@@ -139,7 +168,7 @@ export const serviceDetails: ServiceDetail[] = [
     fit: "小企业、课程项目、活动报名页、产品说明页、培训咨询和轻量服务页。",
     minimum: "介绍页、服务说明、FAQ、右下角聊天窗口、联系入口和基础页面部署。",
     upgrade: "根据真实访客问题补充知识库，接入 Dify 或 Coze，增加后台字段和访问数据分析。",
-    tech: "DeepSeek、Dify、Coze。"
+    tech: "DeepSeek、Dify、Coze"
   },
   {
     title: "项目展示页 / 个人品牌页",
@@ -164,6 +193,49 @@ export const serviceDetails: ServiceDetail[] = [
     minimum: "输入表单、处理规则、AI 生成或分类逻辑、结果展示和导出入口。",
     upgrade: "增加批量处理、历史记录、权限控制、数据看板和更稳定的后台任务。",
     io: "常见输入是文本、表格、问卷、评论和文档；常见输出是摘要、分类、关键词、标签、初稿和可视化结果。"
+  }
+];
+
+export const useCases: UseCaseDetail[] = [
+  {
+    title: "小企业想试 AI 客服",
+    problem: "服务介绍、预约方式、价格范围、产品说明和售后问题经常被重复咨询，但团队暂时没有时间搭建复杂客服系统。",
+    start: "先整理企业介绍、服务范围和 10-20 个高频问题，做成介绍页和 FAQ。",
+    minimum: "介绍页 + FAQ + 右下角 AI 客服 + 联系入口。",
+    upgrade: "根据真实访客问题补充知识库，再考虑 Dify、Coze 或更完整的客服工作流。",
+    related: "/services#ai-customer-service"
+  },
+  {
+    title: "个人或团队想展示项目",
+    problem: "比赛项目、课程成果、个人服务或团队介绍缺少一个可以公开访问、方便转发的展示入口。",
+    start: "先明确项目定位、目标用户、功能亮点、截图材料、FAQ 和联系方式。",
+    minimum: "项目展示页 + FAQ + 联系入口 + 可选后台管理。",
+    upgrade: "增加演示视频、案例记录、博客内容、SEO 页面和多语言版本。",
+    related: "/services"
+  },
+  {
+    title: "教育、研学或课程项目需要 AI 原型",
+    problem: "课程展示、研学路线、学习助手或教学比赛需要能演示核心流程，但暂时不适合做完整平台。",
+    start: "先把任务流程、课程资料、学习引导和常见问题整理出来。",
+    minimum: "课程/研学展示页 + 任务流程 + FAQ + AI 问答入口。",
+    upgrade: "增加资料问答、学习反馈、角色任务、数据记录和后台内容维护。",
+    related: "/starter"
+  },
+  {
+    title: "有 AI 想法但不知道怎么落地",
+    problem: "只有一个想法，例如资料问答助手、表格整理工具或文本生成工具，但不知道页面、数据、模型和部署如何组合。",
+    start: "先把想法拆成用户入口、资料来源、AI 能力、输出结果和部署方式。",
+    minimum: "一个可演示的网页原型，先跑通最核心的一步。",
+    upgrade: "根据使用反馈增加权限、历史记录、更多输入输出类型和后台管理。",
+    related: "/starter"
+  },
+  {
+    title: "有评论、问卷或文档资料需要整理",
+    problem: "评论、问卷、课程反馈、公开文本或文档资料数量多，人工整理耗时且结果不统一。",
+    start: "先确定资料格式、整理目标和期望输出，例如摘要、分类、关键词或情感倾向。",
+    minimum: "上传/输入资料 + AI 处理规则 + 结果展示。",
+    upgrade: "增加批量处理、可视化图表、导出功能和后台任务记录。",
+    related: "/services"
   }
 ];
 
@@ -210,6 +282,16 @@ export const recommendReasons = [
     title: "它保留了继续升级的空间",
     description:
       "最小版本上线后，可以根据真实问题继续补 FAQ，接入 Dify 知识库，尝试 Coze 智能体，或者增加后台字段和更多页面。"
+  },
+  {
+    title: "它不是匿名模板站",
+    description:
+      "智页 AI Lab 不是一个没有背景的匿名模板站，而是由具备 AI 应用、NLP 分析和 Web 原型实践经验的个人开发者维护。它的价值不在于宣称能做大型系统，而在于展示一个小型 AI 应用如何先从首页、FAQ、AI 客服、后台管理和部署网址开始。"
+  },
+  {
+    title: "它把个人经验转化成可参考样板",
+    description:
+      "主理人的 AI 应用、NLP 分析、多模态研究和后端数据处理经验，被整理成一个更容易理解的服务样板：用户不需要先理解复杂技术，而是先看到“一个 AI 想法如何变成可访问网页”。"
   }
 ];
 

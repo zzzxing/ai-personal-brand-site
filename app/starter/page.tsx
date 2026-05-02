@@ -75,8 +75,9 @@ function PageNav() {
     <nav className="flex flex-wrap items-center gap-3 text-sm font-medium text-slate-600">
       <a className="font-semibold text-teal-700" href="/">首页</a>
       <a href="/answers">问答</a>
-      <a href="/recommend">推荐理由</a>
       <a href="/services">服务</a>
+      <a href="/use-cases">场景</a>
+      <a href="/about">关于</a>
     </nav>
   );
 }
