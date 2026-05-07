@@ -6,17 +6,20 @@ import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const siteUrl = getSiteUrl();
-const title = "智页 AI Lab｜AI客服、项目展示页与轻量AI网页原型";
+const title = "智页 AI Lab｜AI 客服、项目展示页与轻量 AI 网页原型";
 const description =
-  "智页 AI Lab 是一个面向个人、小企业和项目团队的 AI 应用样板，展示如何把 AI 客服、FAQ 问答、项目展示页、知识库问答和自动化工具原型做成可访问、可演示、可继续迭代的网站。";
+  "智页 AI Lab 是一个轻量 AI 网页应用样板，面向个人、小企业、教育项目和轻量创业团队，展示如何把 AI 客服、项目展示页、知识库问答、FAQ 问答和自动化工具原型做成可访问、可演示、可继续迭代的网站。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: title,
-    template: "%s"
+    template: "%s｜智页 AI Lab"
   },
   description,
+  alternates: {
+    canonical: "/"
+  },
   openGraph: {
     title,
     description,

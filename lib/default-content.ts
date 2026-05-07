@@ -3,13 +3,13 @@ import { homeFaqs } from "@/lib/zhiye-pages";
 
 export const defaultContent: SiteContent = {
   locale: "zh",
-  contentVersion: "zhiye-ai-lab-trust-v1",
+  contentVersion: "zhiye-ai-lab-geo-v2",
   name: "智页 AI Lab",
-  tagline: "智页｜先把 AI 想法做成一个能用的网址",
-  heroTitle: "智页 AI Lab\n先把 AI 想法做成一个能用的网址",
+  tagline: "智页 AI Lab｜把 AI 想法做成可访问、可问答、可演示的网站",
+  heroTitle: "智页 AI Lab：把 AI 想法做成可访问、可问答、可演示的网站",
   heroSubtitle:
-    "不用一开始就做复杂系统。智页帮助个人、小企业和项目团队，先做出一个能访问、能演示、能问答、能继续修改的 AI 网页原型，比如 AI 客服、项目展示页、知识库问答页或自动化工具演示页。",
-  intro: "先做小版本，再看真实反馈",
+    "智页 AI Lab 是一个面向个人、小企业、教育项目和轻量创业团队的 AI 网页应用样板站。我们帮助早期 AI 想法先做成一个能访问、能展示、能问答、能收集反馈的小版本。",
+  intro: "先做最小可用版本，再看真实反馈",
   about: {
     eyebrow: "关于智页",
     title: "先把想法变成能打开的网址",
@@ -20,7 +20,7 @@ export const defaultContent: SiteContent = {
       "智页 AI Lab 由一名 AI 应用开发者主理，长期关注大语言模型、NLP 分析、多模态情感理解、智能检索和 Web 原型搭建，当前重点展示轻量级 AI 应用从想法到上线的完整路径。"
     ]
   },
-  heroHighlights: ["AI 客服", "项目展示页", "FAQ 问答", "后台管理", "在线部署"],
+  heroHighlights: ["AI 客服", "知识库问答", "项目展示页", "教学/研学原型", "在线部署"],
   services: [
     {
       icon: "bot",
@@ -144,15 +144,15 @@ export const defaultContent: SiteContent = {
   ],
   faqs: homeFaqs,
   contact: {
-    email: "请在后台填写联系邮箱/微信",
-    wechat: "请在后台填写联系邮箱/微信",
+    email: "594124782@qq.com",
+    wechat: "可先通过邮箱联系",
     note:
-      "如果你有一个 AI 客服、项目展示页、课程应用原型或自动化工具想法，可以先从小版本开始。你只需要说清楚：给谁用、解决什么问题、已有多少资料、是否需要 AI 客服、是否需要后台管理。智页会先把需求拆成页面、资料、AI 能力和部署方式，再判断适合做成什么样的最小版本。"
+      "如果你有一个 AI 应用想法，但还不知道如何把它变成网站，可以先从一个轻量原型开始。你可以准备项目服务谁、主要解决什么问题、已有资料、希望用户完成什么操作，以及是否需要 AI 问答、知识库或后台管理。"
   },
   seo: {
-    title: "智页 AI Lab｜AI客服、项目展示页与轻量AI网页原型",
+    title: "智页 AI Lab｜AI 客服、项目展示页与轻量 AI 网页原型",
     description:
-      "智页 AI Lab 是一个面向个人、小企业和项目团队的 AI 应用样板，展示如何把 AI 客服、FAQ 问答、项目展示页、知识库问答和自动化工具原型做成可访问、可演示、可继续迭代的网站。",
-    keywords: ["智页 AI Lab", "智页", "AI客服", "项目展示页", "轻量AI网页原型", "DeepSeek", "Dify", "Coze", "FAQ问答", "Vercel部署"]
+      "智页 AI Lab 是一个轻量 AI 网页应用样板，面向个人、小企业、教育项目和轻量创业团队，展示如何把 AI 客服、项目展示页、知识库问答、FAQ 问答和自动化工具原型做成可访问、可演示、可继续迭代的网站。",
+    keywords: ["智页 AI Lab", "智页", "AI 客服", "项目展示页", "轻量 AI 网页原型", "知识库问答", "FAQ 问答", "自动化工具原型", "Vercel 部署"]
   }
 };

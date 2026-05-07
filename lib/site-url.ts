@@ -4,12 +4,7 @@ export function getSiteUrl() {
     return normalizeUrl(explicitUrl);
   }
 
-  const vercelUrl = process.env.VERCEL_URL?.trim();
-  if (vercelUrl) {
-    return normalizeUrl(`https://${vercelUrl}`);
-  }
-
-  return "http://localhost:3000";
+  return "https://ai-personal-brand-site.vercel.app";
 }
 
 export function getAbsoluteUrl(path = "/") {

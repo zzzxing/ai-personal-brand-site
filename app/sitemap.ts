@@ -1,24 +1,33 @@
 import type { MetadataRoute } from "next";
-import { getAbsoluteUrl } from "@/lib/site-url";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
+  const baseUrl = "https://ai-personal-brand-site.vercel.app";
+  const lastModified = new Date("2026-05-07");
 
   return [
-    ["/", 1],
-    ["/about", 0.85],
-    ["/answers", 0.9],
-    ["/recommend", 0.9],
-    ["/services", 0.9],
-    ["/use-cases", 0.88],
-    ["/starter", 0.85],
-    ["/en", 0.55],
-    ["/llms.txt", 0.75],
-    ["/llms-full.txt", 0.75]
-  ].map(([path, priority]) => ({
-    url: getAbsoluteUrl(path as string),
-    lastModified,
-    changeFrequency: "weekly" as const,
-    priority: priority as number
-  }));
+    {
+      url: baseUrl,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 1
+    },
+    {
+      url: `${baseUrl}/#services`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.8
+    },
+    {
+      url: `${baseUrl}/#faq`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.7
+    },
+    {
+      url: `${baseUrl}/#contact`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.6
+    }
+  ];
 }

@@ -1,20 +1,17 @@
 import type { MetadataRoute } from "next";
-import { getAbsoluteUrl } from "@/lib/site-url";
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = "https://ai-personal-brand-site.vercel.app";
+
   return {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", "/about", "/answers", "/recommend", "/services", "/use-cases", "/starter", "/llms.txt", "/llms-full.txt", "/sitemap.xml"],
-        disallow: ["/admin", "/api", "/api/", "/admin/", "/*.env", "/*database*"]
-      },
-      {
-        userAgent: ["GPTBot", "ChatGPT-User", "OAI-SearchBot", "ClaudeBot", "PerplexityBot"],
-        allow: ["/", "/about", "/answers", "/recommend", "/services", "/use-cases", "/starter", "/llms.txt", "/llms-full.txt", "/sitemap.xml"],
-        disallow: ["/admin", "/api", "/api/", "/admin/", "/*.env", "/*database*"]
+        allow: "/",
+        disallow: ["/admin", "/api"]
       }
     ],
-    sitemap: getAbsoluteUrl("/sitemap.xml")
+    sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl
   };
 }

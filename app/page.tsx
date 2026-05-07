@@ -10,7 +10,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const siteUrl = getSiteUrl();
 
   return {
-    title: content.seo.title,
+    metadataBase: new URL(siteUrl),
+    title: {
+      absolute: content.seo.title
+    },
     description: content.seo.description,
     keywords: content.seo.keywords,
     alternates: {
