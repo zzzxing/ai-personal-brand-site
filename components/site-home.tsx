@@ -83,21 +83,69 @@ const caseCards = [
     problem: "项目需要同时展示研学内容、学生任务、教师管理思路和 AI 问答入口，但单纯用 PPT 很难完整呈现系统流程。",
     delivery: "完成项目首页、活动介绍、学生任务页、教师管理页、AI 问答入口和基础演示流程。",
     result: "项目从“文字方案”变成了可以打开、浏览和演示的 Web 原型，更适合用于比赛展示、课堂演示和后续功能迭代。",
-    proof: "可补充项目截图、演示链接或脱敏后的功能流程图。"
+    proof: "可补充项目截图、演示链接或脱敏后的功能流程图。",
+    replaceableProof: "可替换为：项目截图、演示视频、页面链接、后台截图。"
   },
   {
     title: "案例二：AI 客服 + FAQ 展示站",
     problem: "访客经常重复询问服务内容、适用场景、合作方式和基础价格，如果完全依赖人工沟通，效率较低。",
     delivery: "完成服务介绍页、常见问题模块、联系入口和 AI 客服窗口设计，让访客先通过网页了解基础信息。",
     result: "页面可以承担“第一轮解释”的作用，帮助访客快速判断是否适合继续沟通。",
-    proof: "可补充页面截图、FAQ 示例或 AI 客服问答截图。"
+    proof: "可补充页面截图、FAQ 示例或 AI 客服问答截图。",
+    replaceableProof: "可替换为：FAQ 问答截图、客服窗口截图、配置截图。"
   },
   {
     title: "案例三：NLP 文本分析工具原型",
     problem: "问卷、评论、访谈和文本资料需要反复进行摘要、分类、关键词提取和结果整理，人工处理耗时较长。",
     delivery: "完成文本输入、分析结果展示、关键词提取、分类结果和可视化区域设计。",
     result: "将原本依赖手工整理的文本分析流程做成可复用工具，为后续继续接入模型接口和数据管理打下基础。",
-    proof: "可补充脱敏数据示例、功能截图或分析结果页面。"
+    proof: "可补充脱敏数据示例、功能截图或分析结果页面。",
+    replaceableProof: "可替换为：脱敏数据样例、分析结果截图、功能流程图。"
+  }
+];
+
+const proofCards = [
+  {
+    title: "项目首页截图示例",
+    description: "用于展示 AI 网页原型的首页结构、首屏定位、服务说明和联系入口。",
+    tag: "示例截图",
+    mark: "示例材料",
+    visual: "homepage"
+  },
+  {
+    title: "AI 问答窗口示例",
+    description: "用于展示 FAQ、知识库问答或 AI 客服入口的交互效果。",
+    tag: "脱敏演示",
+    mark: "脱敏占位",
+    visual: "chat"
+  },
+  {
+    title: "后台管理页面示例",
+    description: "用于展示内容管理、案例维护、FAQ 编辑或项目配置能力。",
+    tag: "功能占位",
+    mark: "示例材料",
+    visual: "admin"
+  },
+  {
+    title: "文本分析结果示例",
+    description: "用于展示评论、问卷、访谈或课程反馈的摘要、分类和关键词提取结果。",
+    tag: "模拟数据",
+    mark: "脱敏占位",
+    visual: "analysis"
+  },
+  {
+    title: "项目流程图示例",
+    description: "用于说明从需求确认、页面设计、AI 接入、部署上线到反馈迭代的基本流程。",
+    tag: "流程示意",
+    mark: "示例材料",
+    visual: "flow"
+  },
+  {
+    title: "更新记录示例",
+    description: "用于展示网站持续维护、GEO 优化、llms.txt、sitemap、FAQ 和案例内容的更新情况。",
+    tag: "维护记录",
+    mark: "脱敏占位",
+    visual: "updates"
   }
 ];
 
@@ -218,6 +266,7 @@ export function SiteHome({ content }: { content: SiteContent }) {
         <RecommendedFor />
         <PrototypeOptions />
         <CaseStudies />
+        <ProofMaterials />
         <LaunchProcess />
         <TrustReasons />
         <FaqSection />
@@ -479,6 +528,38 @@ function CaseStudies() {
               <CaseLine label="交付" value={card.delivery} />
               <CaseLine label="结果" value={card.result} />
               <CaseLine label="证明材料" value={card.proof} />
+              <CaseLine label="可替换的证明材料" value={card.replaceableProof} />
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProofMaterials() {
+  return (
+    <section id="proofs" className="bg-white/65 py-14 sm:py-16 lg:py-24">
+      <div className="section-shell">
+        <SectionHeading
+          eyebrow="证明材料"
+          title="可补充的证明材料"
+          description="以下材料为脱敏展示与示例占位，用于说明智页 AI Lab 可提供哪些类型的项目证明。正式对外展示时，可替换为真实项目截图、演示链接、软著信息、GitHub 仓库或功能录屏。"
+        />
+        <NoticeStrip />
+        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {proofCards.map((card) => (
+            <article key={card.title} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <ProofIllustration type={card.visual} mark={card.mark} />
+              <div className="p-6">
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="text-lg font-semibold text-slate-950">{card.title}</h3>
+                  <span className="shrink-0 rounded-full border border-teal-100 bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700">
+                    {card.tag}
+                  </span>
+                </div>
+                <p className="mt-4 text-sm leading-7 text-slate-600">{card.description}</p>
+              </div>
             </article>
           ))}
         </div>
@@ -520,15 +601,16 @@ function TrustReasons() {
           <div>
             <SectionHeading eyebrow="可信度" title="为什么可以相信智页" />
             <div className="mt-6 max-w-3xl space-y-4 text-base leading-8 text-slate-600">
-              <p>智页 AI Lab 关注的是 AI 应用从想法到网页原型的早期落地。它不把 AI 包装成万能系统，而是强调用清晰页面、真实场景和可验证功能，让用户先看到一个可运行的小版本。</p>
-              <p>我们更重视三个原则：能访问、能看懂、能迭代。项目不应该只停留在文档和 PPT 中，页面要清楚说明服务对象、核心问题、解决方案和使用方式，第一版也要留下继续扩展 AI 问答、知识库、后台管理和数据分析的空间。</p>
+              <p>本站为个人维护的轻量 AI 网页应用展示站，重点说明 AI 想法如何先形成可访问、可问答、可演示的网页原型，而不是冒充大型商业平台或成熟客户案例库。</p>
+              <p>当前案例以脱敏和示例材料为主，页面明确标注哪些内容是示例、脱敏或占位展示，避免让访客误解为真实客户数据、真实合作单位或已公开认证材料。</p>
+              <p>后续如有正式项目对外展示，可将占位材料替换为真实项目截图、公开演示链接、代码仓库、功能录屏或项目文档；联系方式保留邮箱和微信，便于先沟通需求边界。</p>
             </div>
           </div>
           <div className="grid content-start gap-3">
             {[
-              ["能访问", "项目拥有一个能打开的网址，而不是只停留在文档或 PPT。"],
-              ["能看懂", "页面清楚说明服务对象、核心问题、解决方案和使用方式。"],
-              ["能迭代", "第一版保留继续扩展 AI 问答、知识库、后台管理和数据分析的空间。"]
+              ["个人维护", "本站以个人开发者展示为主，不虚构客户名称、合作单位或组织规模。"],
+              ["明确标注", "示例证明、脱敏材料和占位截图均在页面中明确说明用途。"],
+              ["可替换材料", "正式项目可替换为真实截图、公开链接、GitHub 仓库或功能录屏。"]
             ].map(([title, description]) => (
               <article key={title} className="rounded-2xl border border-teal-100 bg-teal-50 p-5">
                 <h3 className="text-base font-semibold text-slate-950">{title}</h3>
@@ -620,6 +702,102 @@ function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function NoticeStrip() {
+  return (
+    <div className="mt-8 rounded-2xl border border-amber-100 bg-amber-50/80 px-5 py-4 text-sm leading-7 text-amber-900">
+      <span className="font-semibold">说明：</span>
+      本站部分证明材料为脱敏示例与占位展示，不代表真实客户数据。正式项目交付时可替换为真实截图、演示链接或项目文档。
+    </div>
+  );
+}
+
+function ProofIllustration({ type, mark }: { type: string; mark: string }) {
+  const gradientId = `proof-gradient-${type}`;
+
+  return (
+    <svg className="h-52 w-full bg-slate-50" viewBox="0 0 520 260" role="img" aria-label={`${mark}视觉占位图`}>
+      <defs>
+        <linearGradient id={gradientId} x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stopColor="#ccfbf1" />
+          <stop offset="58%" stopColor="#eff6ff" />
+          <stop offset="100%" stopColor="#fef3c7" />
+        </linearGradient>
+      </defs>
+      <rect width="520" height="260" fill={`url(#${gradientId})`} />
+      <rect x="28" y="24" width="464" height="212" rx="24" fill="rgba(255,255,255,0.82)" stroke="rgba(15,23,42,0.1)" />
+      <rect x="46" y="42" width="148" height="26" rx="13" fill="#0f766e" opacity="0.92" />
+      <text x="62" y="61" fill="#ffffff" fontSize="16" fontWeight="700">
+        {mark}
+      </text>
+      {type === "homepage" ? (
+        <>
+          <rect x="56" y="92" width="250" height="22" rx="11" fill="#0f172a" />
+          <rect x="56" y="126" width="330" height="12" rx="6" fill="#94a3b8" />
+          <rect x="56" y="150" width="230" height="12" rx="6" fill="#cbd5e1" />
+          <rect x="56" y="188" width="92" height="28" rx="14" fill="#14b8a6" />
+          <rect x="166" y="188" width="92" height="28" rx="14" fill="#e2e8f0" />
+          <rect x="338" y="92" width="108" height="98" rx="18" fill="#dbeafe" stroke="#bfdbfe" />
+        </>
+      ) : null}
+      {type === "chat" ? (
+        <>
+          <rect x="62" y="92" width="260" height="34" rx="17" fill="#e2e8f0" />
+          <rect x="188" y="142" width="268" height="38" rx="19" fill="#ccfbf1" />
+          <rect x="62" y="196" width="344" height="26" rx="13" fill="#f8fafc" stroke="#cbd5e1" />
+          <circle cx="434" cy="209" r="13" fill="#14b8a6" />
+        </>
+      ) : null}
+      {type === "admin" ? (
+        <>
+          <rect x="56" y="88" width="108" height="132" rx="16" fill="#f1f5f9" />
+          <rect x="188" y="92" width="248" height="22" rx="11" fill="#0f172a" opacity="0.82" />
+          <rect x="188" y="132" width="280" height="18" rx="9" fill="#cbd5e1" />
+          <rect x="188" y="166" width="238" height="18" rx="9" fill="#cbd5e1" />
+          <rect x="188" y="200" width="116" height="24" rx="12" fill="#14b8a6" />
+        </>
+      ) : null}
+      {type === "analysis" ? (
+        <>
+          <rect x="56" y="98" width="86" height="112" rx="14" fill="#bfdbfe" />
+          <rect x="164" y="132" width="86" height="78" rx="14" fill="#99f6e4" />
+          <rect x="272" y="78" width="86" height="132" rx="14" fill="#fde68a" />
+          <rect x="390" y="96" width="58" height="14" rx="7" fill="#64748b" />
+          <rect x="390" y="126" width="76" height="14" rx="7" fill="#94a3b8" />
+          <rect x="390" y="156" width="62" height="14" rx="7" fill="#cbd5e1" />
+        </>
+      ) : null}
+      {type === "flow" ? (
+        <>
+          {[66, 162, 258, 354].map((x, index) => (
+            <g key={x}>
+              <circle cx={x} cy="148" r="30" fill={index % 2 === 0 ? "#ccfbf1" : "#dbeafe"} stroke="#14b8a6" />
+              <text x={x - 8} y="156" fill="#0f766e" fontSize="22" fontWeight="800">
+                {index + 1}
+              </text>
+              {index < 3 ? <path d={`M ${x + 34} 148 L ${x + 62} 148`} stroke="#94a3b8" strokeWidth="5" strokeLinecap="round" /> : null}
+            </g>
+          ))}
+          <rect x="68" y="202" width="330" height="14" rx="7" fill="#cbd5e1" />
+        </>
+      ) : null}
+      {type === "updates" ? (
+        <>
+          {[92, 132, 172, 212].map((y, index) => (
+            <g key={y}>
+              <circle cx="68" cy={y} r="9" fill="#14b8a6" />
+              <rect x="92" y={y - 9} width={index === 0 ? 292 : index === 1 ? 240 : 196} height="18" rx="9" fill={index === 0 ? "#0f172a" : "#cbd5e1"} />
+            </g>
+          ))}
+          <path d="M 68 92 L 68 212" stroke="#99f6e4" strokeWidth="4" />
+        </>
+      ) : null}
+      <text x="46" y="232" fill="#64748b" fontSize="14" fontWeight="700">
+        用于页面展示的视觉占位，不代表真实客户材料
+      </text>
+    </svg>
   );
 }
 
